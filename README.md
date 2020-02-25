@@ -1,2 +1,2 @@
-# week4
-Your repository for tutorial week 4
+# SmartyPantZ
+Repo for the project.
