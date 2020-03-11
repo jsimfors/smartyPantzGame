@@ -5,9 +5,103 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+* {
+  /*cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/happy.png"), auto;
+  */
+  cursor: url("https://i.imgur.com/TlcA2Xs.png"), auto;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* GAMEVIEW*/
+.gameView {
+  text-align: center;
+  margin: 0px;
+}
+
+.gameView #gameQuestion {
+  margin-bottom: -30px; 
+}
+
+
+.gameView img {
+  max-width: 100%;
+  border-radius: 15px;
+}
+
+#pantzLife {
+  margin-top:40px;
+  margin-bottom: 40px;
+}
+
+/* White box with the actuall game */
+#gamePlay {
+  background-color: rgba(255, 255, 255, 0.897);
+  padding: 20px;
+  padding-top:50px;
+  border-radius: 70px;
+
+  /* Shadow: */
+  -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+}
+
+.gameView h5{ /* Track title */
+  text-align: center;
+}
+
+#gamePlay img { /* Track image */
+  /* Shadow: */
+  -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+}
+
+/* STARTVIEW */
+.startView {
+  text-align: center;
+}
+
+.startView img {
+  max-width: 80%;
+}
+
+.infotext {
+  margin-top: 40px;
+}
+
+.nameForm {
+  max-width: 20%;
+}
+
+.highscoreButton {
+  margin: 20px;
+}
+
+/* HIGHSCORE */
+.highScoreView .tableBox {
+  background-color: rgba(255, 255, 255, 0.897);
+  padding: 20px;
+  padding-top:50px;
+  border-radius: 70px;
+  -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+}
+
+.highScoreView img {
+  margin-bottom: -50px; 
+  max-width: 100%;
+}
+
+

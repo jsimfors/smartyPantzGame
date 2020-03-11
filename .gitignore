@@ -62,3 +62,6 @@ typings/
 
 # macOS folder attribute file
 .DS_Store
+
+# file with api keys
+apiConfig.js
