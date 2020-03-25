@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col, Button, Image, Form, InputGroup, FormControl} from 'react-bootstrap';
+import {Container, Row, Col, Button, Image, InputGroup, FormControl} from 'react-bootstrap';
 
 
 function StartView(props) {
@@ -14,7 +14,7 @@ function StartView(props) {
 
       <Row>
         <Col>
-        <div className="infotext">Welcome to SmartyPantZ! The smartest music quiz on the internet! &#10; Type in your prefered name and start quizzing. Three wrong answers and you lose!</div>
+        <div className="infotext">Welcome to SmartyPantZ, the smartest music quiz on the internet! &#10; Type in your prefered name and start quizzing. Three wrong answers and you lose!</div>
         </Col>
       </Row>
 
@@ -35,7 +35,7 @@ function StartView(props) {
             }}
           />
           <InputGroup.Append>
-            <Button variant="outline-danger" href="/game" onClick={props.model.setUsername(props.username)} disabled={props.username==""}>START</Button>
+            <Button variant="outline-danger" href="/game" onClick={props.model.setUsername(props.username)} disabled={props.username===""}>START</Button>
           </InputGroup.Append>
         </InputGroup>
 

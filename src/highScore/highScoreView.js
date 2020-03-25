@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {Col, Row, Image, Table, Container} from 'react-bootstrap';
 
 
@@ -14,7 +13,7 @@ function HighScoreView({onAdd, highScores}) {
       </Col>
     </Row>
     <Row className="tableBox">
-        <Table striped borded size="sm">
+        <Table striped borded="true" size="sm">
         <thead>
             <tr>
             <th>Rank</th>

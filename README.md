@@ -42,4 +42,4 @@ The model that holds the game state, including username, current score and curre
 > GameModel.js
 
 <b>How to play</b><br />
-Visit <link>www.google.com</link> to try it out! Alternatively, clone this repo and run `npm start` to play it locally.
+Visit <link>https://smartypantz-c6131.firebaseapp.com</link> on Chrome to try it out! Alternatively, clone this repo and run `npm start` to play it locally.

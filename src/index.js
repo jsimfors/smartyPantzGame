@@ -15,6 +15,8 @@ import * as serviceWorker from './serviceWorker';
 //<FirebaseContext.Provider value={db}>
 //</FirebaseContext.Provider>
 
+// To deploy, run 'yarn build' and then 'firebase deploy'
+
 ReactDOM.render(
     <App />
     ,

@@ -7,3 +7,5 @@ function GameOverView() {
       </div>
     );
 }
+
+export default GameOverView;

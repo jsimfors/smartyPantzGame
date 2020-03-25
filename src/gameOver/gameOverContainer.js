@@ -1,7 +1,9 @@
 import React from 'react';
+import GameOverView from './gameOverView.js'
 
-const GameOver = () => {
-    return <gameOverView/>
+
+const GameOver = (props) => {
+    return <GameOverView/>
 }
 
 export default GameOver;

@@ -27,7 +27,7 @@ function App() {
             />
           </Route>
           <Route path="/game">
-            <Game
+            <Game model = {model}
             />
           </Route>
           <Route exact path="/highscore">
