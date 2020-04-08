@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Row, Col, Image, ProgressBar, Button} from 'react-bootstrap';
-import MyVerticallyCenteredModal from './modal.js';
+import ResultModal from './modal.js';
 import {useHistory} from 'react-router-dom';
 
 const GameView = (props) => {
@@ -53,7 +53,7 @@ const GameView = (props) => {
       </Row>
       <Row> {/* MESSAGE RÄTT/FEL */}
         <Col>
-          <MyVerticallyCenteredModal
+          <ResultModal
             show={props.modalShow}
             onHide={() => props.setModalShow(false)}
             message={props.message}

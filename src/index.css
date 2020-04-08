@@ -125,27 +125,26 @@ code {
   border-radius: 35px;
 }
 
-.modal-content button{
+.modal-footer#w button{
   color: #520207;
   font-weight: bold;
   border-width: 3px;
   border-color: #520207;
   border-radius: 10px;
-  background-image: linear-gradient(to top, #9a0003 0%, #fe5d65 100%);}
-
-.modal-body{
-  font-size:xx-large;
-    font-weight: bold;
-
-  text-align: center;
-  -webkit-text-stroke: 2px #00000062;
-  text-shadow: 0px 0px 6px #000000ad;
+  background-image: linear-gradient(to top, #9a0003 0%, #fe5d65 100%);
 }
 
-.modal-body .innerText{
-  font-size: medium;
-  font-weight: normal;
-  -webkit-text-stroke: 0px #00000089;
-  text-shadow: 0px 0px 0px #000000;
+.modal-footer#r button {
+  color: #305152;
+  font-weight: bold;
+  border-width: 3px;
+  border-color: #305152;
+  border-radius: 10px;
+  background-image: linear-gradient(to top, #31be95 0%, #76f5d0 100%);
+}
 
+
+.modal-body{
+  font-size: large;
+  text-align: center;
 }

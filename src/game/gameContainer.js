@@ -14,7 +14,9 @@ const Game = (props) => {
     const [track1, setTrack1] = React.useState();
     const [track2, setTrack2] = React.useState();
     const [question, setQ] = React.useState(0);
-    const [message, setMessage] = React.useState('');
+    const [message, setMessage] = React.useState({ result:'r', text: '', img:'1'}); 
+    //setMessage: result: r = right/ w = wrong/ t = time's up 
+    // text: the text that's then displayed
     const [countdown, setCountdown] = React.useState(5);
     const [time, setTime] = React.useState(100);
     const [modalShow, setModalShow] = React.useState(false);
@@ -186,12 +188,16 @@ function getApiPlaylist(category, client_id, client_secret, setTrack1, setTrack2
 function checkAnswer(trackChosen, trackOther, username, score, setScore, lives, setLives, setMessage, history, setModalShow) {
     if (trackChosen !== null && trackChosen.popularity>trackOther.popularity) {
         setScore(score + 1);
-        setMessage(<div><b style={{ color: '#84fab0'}}> You're truly a smartyPant! </b><br /><div className="innerText"><i>{trackChosen.name}</i> has popularity <b>{trackChosen.popularity}</b> and <i>{trackOther.name}</i> <b>{trackOther.popularity}</b></div></div>);
-        setModalShow(true);
+        var i = Math.floor(Math.random() * 5) + 1;
+        setMessage({result:'r', text: <div><i>{trackChosen.name}</i> has popularity <b>{trackChosen.popularity}%</b> and <i>{trackOther.name}</i> <b>{trackOther.popularity}%</b></div>, img: i});
+        setModalShow(true)
         return true;
     } else {
-        if (trackChosen !== null) setMessage(<div><b style={{ color: 'red'}}> Oh you dumb sock! </b><br /><div className="innerText"><i>{trackChosen.name}</i> has popularity <b>{trackChosen.popularity}</b> and <i>{trackOther.name}</i> <b>{trackOther.popularity}</b></div></div>);
-        else setMessage(<div><b style={{  color: '#9f0205'}}> Oh you sleepy sock! You didn't make it in time.</b><div className="innerText">Inner text</div></div>);
+        if (trackChosen !== null){ 
+            var i = Math.floor(Math.random() * 6) + 1;
+            setMessage({result: 'w', text: <div><i>{trackChosen.name}</i> has popularity <b>{trackChosen.popularity}%</b> and <i>{trackOther.name}</i> <b>{trackOther.popularity}%</b></div>, img: i});
+        }        
+        else setMessage({result: 't',text: <div>You didn't make it in time.</div>, img:'1'});
 
         if (lives > 1) {
             setLives(lives - 1);
