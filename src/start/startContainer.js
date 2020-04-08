@@ -1,10 +1,15 @@
-import React from 'react';
-import StartView from './startView.js'
+import StartView from './startView.js';
+import {connect} from 'react-redux';
+import {setUsername, setCategory} from '../actions';
 
-const Start = (props) => {
-    const [username, setUsername] = React.useState("");
-    return <StartView model={props.model} username={username} setUsername={setUsername}
-    />
-}
+const mapStateToProps = state => ({
+    username: state.username,
+    category: state.category
+});
 
-export default Start;
+const mapDispatchToProps = dispatch => ({
+    setUsername: username => dispatch(setUsername(username)),
+    setCategory: category => dispatch(setCategory(category))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(StartView);

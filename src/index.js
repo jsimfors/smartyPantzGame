@@ -1,25 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-//import {Provider} from 'react-redux';
-//import {createStore} from 'redux';
-//import reducer from 'GameModel';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-//import { FirebaseContext } from './firebase';
-
-//const store = createStore(reducer);
-//<Provider store = {store}></Provider>
-//</Provider>
-
-//<FirebaseContext.Provider value={db}>
-//</FirebaseContext.Provider>
+import {Provider} from 'react-redux';
+import reducer from './reducers';
+import {createStore} from 'redux';
 
 // To deploy, run 'yarn build' and then 'firebase deploy'
 
+const store = createStore(reducer);
+
 ReactDOM.render(
-    <App />
-    ,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

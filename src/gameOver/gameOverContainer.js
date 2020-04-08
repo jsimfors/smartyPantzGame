@@ -1,9 +1,8 @@
-import React from 'react';
 import GameOverView from './gameOverView.js'
+import {connect} from 'react-redux';
 
+const mapStateToProps = state => ({
+    score: state.score,
+});
 
-const GameOver = (props) => {
-    return <GameOverView/>
-}
-
-export default GameOver;
+export default connect(mapStateToProps)(GameOverView);

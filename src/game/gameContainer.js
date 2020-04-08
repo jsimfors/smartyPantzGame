@@ -1,124 +1,218 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
-
-import GameView from './gameView.js'
+import GameView from './gameView.js';
 import {client_id, client_secret} from '../util/apiConfig.js';
+import {db} from '../util/dbConfig.js';
+import {useHistory} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {setScore, setLives} from '../actions';
+import PropTypes from 'prop-types';
 
 const Game = (props) => {
+    const history = useHistory();
 
     /* PLAYLIST VERSION */
-
-    var playlistid = '1Invdu6HejW05i65d0UCTE';
     const [track1, setTrack1] = React.useState();
     const [track2, setTrack2] = React.useState();
-    const [question, setQ] = React.useState(1);
+    const [question, setQ] = React.useState(0);
     const [message, setMessage] = React.useState('');
-    
-    
-    React.useEffect( () => {
-        getApiPlaylist(playlistid, client_id, client_secret, setTrack1, setTrack2)
-    },[question, playlistid])
+    const [countdown, setCountdown] = React.useState(5);
+    const [time, setTime] = React.useState(100);
+    const [modalShow, setModalShow] = React.useState(false);
+    const [statsMessage, setStatsMessage] = React.useState("");
+
+    const nextQuestion = () => setQ(question + 1);
+
+    // Start countdown and reset score and lives first time
+    React.useEffect(() => {
+        props.setScore(0);
+        props.setLives(3);
+        setCountdown(5);
+        var i = 5;
+        const interval = setInterval(() => {
+            setCountdown(countdown => countdown - 1)
+            --i;
+            if (i === 0) {
+                clearInterval(interval);
+                setQ(question+1);
+            }
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    // Start timebar, load new question and load new stats
+    React.useEffect(() => {
+        if (countdown < 1 && !modalShow) {
+            setTime(100);
+            var i = 100;
+            const interval = setInterval(() => {
+                setTime(time => time - 1);
+                --i;
+                // delay of setTime()
+                if (i === -5) {
+                    clearInterval(interval);
+                    checkAnswer(null, null, props.username, props.score, props.setScore, props.lives, props.setLives, setMessage, history, setModalShow);
+                }
+            }, 100);
+            if (question > 4) {
+                db.collection("highscore").orderBy("score").get()
+                    .then((querySnapshot) => {
+                        const scores = [];
+                        querySnapshot.forEach((doc) => {
+                            scores.push(doc.data().score);
+                        });
+                        setStatsMessage(calculatePercent(props.score, scores));
+                    });
+            }
+            getApiPlaylist(props.category, client_id, client_secret, setTrack1, setTrack2);
+            return () => clearInterval(interval);
+        }
+    }, [question, modalShow]);
 
     // Lives
     var opacity = [1, 1, 1];
-    if (props.model.getLives() === 2) opacity = [1, 1, 0.5];
-    else if (props.model.getLives() === 1) opacity = [1, 0.5, 0.5];
-
-    const history = useHistory();
+    if (props.lives === 2) opacity = [1, 1, 0.5];
+    else if (props.lives === 1) opacity = [1, 0.5, 0.5];
 
     return <GameView
-        model={props.model}
+        score={props.score}
+        opacity = {opacity}
         track1={track1}
         track2={track2}
         checkAnswer={(trackChosen) => {
-            if (trackChosen === track1) checkAnswer(trackChosen, track2, props.model, setQ, question, setMessage, history);
-            else checkAnswer(trackChosen, track1, props.model, setQ, question, setMessage, history);
+            if (trackChosen === track1) checkAnswer(trackChosen, track2, props.username, props.score, props.setScore, props.lives, props.setLives, setMessage, history, setModalShow);
+            else checkAnswer(trackChosen, track1, props.username, props.score, props.setScore, props.lives, props.setLives, setMessage, history, setModalShow);
         }}
-        opacity = {opacity}
         message = {message}
-        />
+        countdown= {countdown}
+        time = {time}
+        modalShow={modalShow}
+        setModalShow={setModalShow}
+        nextQuestion={nextQuestion}
+        statsMessage={statsMessage}/>
 }
 
-function getApiPlaylist(playlistid, client_id, client_secret, setTrack1, setTrack2){
-    console.log("fetch starting!")
+Game.propTypes = {
+    score: PropTypes.number.isRequired,
+    lives: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    setScore: PropTypes.func.isRequired,
+    setLives: PropTypes.func.isRequired
+};
 
-    var i = Math.floor(Math.random()*100)
-    var j = Math.floor(Math.random()*100)
+function getApiPlaylist(category, client_id, client_secret, setTrack1, setTrack2){
+    console.log("fetch starting!");
 
-    
-    console.log('i starten är i ' +i)
+    var i = Math.floor(Math.random()*100);
+    var j = i;
+    while (j === i) {
+        j = Math.floor(Math.random()*100);
+    }
+
+    console.log('i starten är i ' +i);
+
     // your application requests authorization
     var authOptions = {
-    url: 'https://accounts.spotify.com/api/token',
-    headers: {
-        'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
-    },
-    form: {
-        grant_type: 'client_credentials'
-    },
-    json: true
-    };
-    var request = require('request'); // "Request" library
-    console.log("authOptions is: " + authOptions)
-  
-    request.post(authOptions, function(error, response, body) {
-        console.log(error)
-        console.log(response.statusCode)
-    if (!error && response.statusCode === 200) {
-        console.log("In the if-statement!")
-        // use the access token to access the Spotify Web API
-        var token = body.access_token;
-        var options = {
-          url: 'https://api.spotify.com/v1/playlists/' + playlistid,
-        //url: 'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V',
+        url: 'https://accounts.spotify.com/api/token',
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+        },
+        form: {
+            grant_type: 'client_credentials'
         },
         json: true
-        };
-  
-        request.get(options, function(error, response, body) {
-            // console.log("Body in fetch: ");
-            // console.log(body);
-            // console.log("Body.title in fetch: ");
-            // console.log(body.id);
+    };
+    var request = require('request'); // "Request" library
+    
+    console.log("authOptions is: " + authOptions);
+    
+    var playlistid;
+    console.log(category);
+    switch (category) {
+        case "EDM":
+            // EDM Hits 2020
+            playlistid = '6KU6tm70eecXvDNITltN3h';
+            break;
+        case "Rock":
+            // Rock Classics
+            playlistid = '37i9dQZF1DWXRqgorJj26U';
+            break;
+        case "Hip-hop":
+            // Get Turnt
+            playlistid = '37i9dQZF1DWY4xHQp97fN6';
+            break;
+        default:
+            playlistid = '4hvCIDjqQBWj8uz5jPntNf';
+    }
+    console.log(playlistid);
 
-            //setPlaylist(body)
-            //setTrack(body);
-            console.log('här är bodyn: '+body)
-            console.log(body)
-            console.log('här är iet' + i)
-            console.log("body.tracks... " + body.tracks.items[i]);
-            setTrack1(body.tracks.items[i].track);
-            setTrack2(body.tracks.items[j].track);
-  
-  
-        });
-        //return body
+    request.post(authOptions, function(error, response, body) {
+        console.log(error);
+        console.log(response.statusCode);
+        if (!error && response.statusCode === 200) {
+            console.log("In the if-statement!");
+
+            // use the access token to access the Spotify Web API
+            var token = body.access_token;
+            var options = {
+                url: 'https://api.spotify.com/v1/playlists/' + playlistid,
+                //url: 'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                json: true
+            };
+    
+            request.get(options, function(error, response, body) {
+                // console.log("Body in fetch: ");
+                // console.log(body);
+                // console.log("Body.title in fetch: ");
+                // console.log(body.id);
+
+                //setPlaylist(body)
+                //setTrack(body);
+                console.log('här är bodyn: '+body);
+                console.log(body);
+                console.log('här är iet' + i);
+                console.log("body.tracks... " + body.tracks.items[i]);
+                setTrack1(body.tracks.items[i].track);
+                setTrack2(body.tracks.items[j].track);
+            });
+            //return body
         }
     });
-  }
+}
 
+function checkAnswer(trackChosen, trackOther, username, score, setScore, lives, setLives, setMessage, history, setModalShow) {
+    if (trackChosen !== null && trackChosen.popularity>trackOther.popularity) {
+        setScore(score + 1);
+        setMessage(<div><b style={{ color: '#84fab0'}}> You're truly a smartyPant! </b><br /><div className="innerText"><i>{trackChosen.name}</i> has popularity <b>{trackChosen.popularity}</b> and <i>{trackOther.name}</i> <b>{trackOther.popularity}</b></div></div>);
+        setModalShow(true);
+        return true;
+    } else {
+        if (trackChosen !== null) setMessage(<div><b style={{ color: 'red'}}> Oh you dumb sock! </b><br /><div className="innerText"><i>{trackChosen.name}</i> has popularity <b>{trackChosen.popularity}</b> and <i>{trackOther.name}</i> <b>{trackOther.popularity}</b></div></div>);
+        else setMessage(<div><b style={{  color: '#9f0205'}}> Oh you sleepy sock! You didn't make it in time.</b><div className="innerText">Inner text</div></div>);
 
-
-function checkAnswer(trackChosen, trackOther, model, setQ, question, setMessage, history){
-    if(trackChosen.popularity>trackOther.popularity){
-        setQ(question + 1);
-        setMessage('Rätt');
-        return true
-    }else{
-        setMessage('Fel');
-        if(model.getLives()>1){
-            model.decrementLives();
-            setQ(question + 1);
-        }else{
+        if (lives > 1) {
+            setLives(lives - 1);
+        } else {
+            db.collection("highscore").add({
+                name: username,
+                score: Number(score)
+            });
             history.push('/gameover');
         }
-        return false
+        setModalShow(true);
+        return false;
     }
 }
 
-
+function calculatePercent(currentScore, scores) {
+    var length = scores.length;
+    var lesserPoints = scores.findIndex((num) => currentScore <= num);
+    var percent = 100 - Math.round(lesserPoints/length * 100);
+    return "Keep it up! Only " + percent + " % has got this far!";
+}
 
 // Old function to get tracks
 /*
@@ -169,5 +263,16 @@ function getApiData(id, client_id, client_secret, setTrack){
 }
 */
 
+const mapStateToProps = state => ({
+    score: state.score,
+    lives: state.lives,
+    category: state.category,
+    username: state.username
+});
 
-export default Game;
+const mapDispatchToProps = dispatch => ({
+    setScore: score => dispatch(setScore(score)),
+    setLives: lives => dispatch(setLives(lives))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
