@@ -90,7 +90,8 @@ const Game = (props) => {
         modalShow={modalShow}
         setModalShow={setModalShow}
         nextQuestion={nextQuestion}
-        statsMessage={statsMessage}/>
+        statsMessage={statsMessage}
+        category={props.category}/>
 }
 
 Game.propTypes = {
@@ -129,6 +130,7 @@ function getApiPlaylist(category, client_id, client_secret, setTrack1, setTrack2
     console.log("authOptions is: " + authOptions);
     
     var playlistid;
+    console.log("category is:")
     console.log(category);
     switch (category) {
         case "EDM":

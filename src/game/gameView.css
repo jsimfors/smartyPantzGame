@@ -1,0 +1,87 @@
+
+/* CSS used by all gameviews: */
+.gameView {
+    text-align: center;
+    margin: 0px;
+    height: 100%;
+  }
+  
+  .gameView #gameQuestion {
+    margin-bottom: -30px; 
+  }
+  
+  .gameView img {
+    max-width: 100%;
+    border-radius: 15px;
+  }
+  
+  #pantzLife {
+    margin-top:40px;
+    margin-bottom: 40px;
+  }
+  
+  .h0 {
+    font-size: 1000%;
+  }
+  
+  .result {
+    margin: 10px;
+    font-size: large;
+  }
+  
+  /* White box with the actuall game */
+  #gamePlay {
+    background-color: rgba(255, 255, 255, 0.897);
+    padding: 20px;
+    padding-top:50px;
+    border-radius: 70px;
+    -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  }
+  
+  .gameView h5{
+    text-align: center;
+  }
+  
+  #gamePlay img {
+    -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  }
+/* CLASSIC CATHEGORY */
+
+.gameView#Rock{
+    background-image: linear-gradient(120deg, #131212 0%, #272829 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* MODAL */
+.modal-content{
+    border-radius: 35px;
+  }
+  
+  .modal-footer#w button{
+    color: #520207;
+    font-weight: bold;
+    border-width: 3px;
+    border-color: #520207;
+    border-radius: 10px;
+    background-image: linear-gradient(to top, #9a0003 0%, #fe5d65 100%);
+  }
+  
+  .modal-footer#r button {
+    color: #305152;
+    font-weight: bold;
+    border-width: 3px;
+    border-color: #305152;
+    border-radius: 10px;
+    background-image: linear-gradient(to top, #31be95 0%, #76f5d0 100%);
+  }
+  
+  
+  .modal-body{
+    font-size: large;
+    text-align: center;
+  }

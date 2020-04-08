@@ -18,11 +18,13 @@ const GameView = (props) => {
   }
 
   return (
-    <Container className='gameView' fluid>
+    
+    <Container className='gameView' id={props.category} fluid>
       {/* TOP-BAR. Includes: PantZ life*/}
       <Row>
         <Col style={{marginTop: "4%"}} md={{span:2, offset:0}}>
           <Button variant="outline-danger" onClick={() => history.push('/')}>LEAVE GAME</Button>
+          <h6></h6>
         </Col>
         <Col style={{marginTop: "4%"}} md={{span:2, offset:0}}>
           <h2>Score: {props.score}</h2>
