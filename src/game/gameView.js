@@ -6,22 +6,34 @@ import {useHistory} from 'react-router-dom';
 const GameView = (props) => {
   const history = useHistory();
 
+  // Change pantZlife img depending on category
+  if(props.category == 'Rock'){
+    var pantzLifesrc = require("../imgs/pantzRock.png");
+  }else{var pantzLifesrc="https://i.imgur.com/Zrdtb9n.png"
+  }
+
   // Lives
   var xsOffset = [6, 0, 0];
   var lifeCols = [];
   for (let i = 0; i < 3; i++) {
     lifeCols.push(
       <Col key={i} md={{span:1, offset:0}} xs={{span:2, offset:xsOffset[i]}}>
-        <Image id="pantzLife" style={{opacity: props.opacity[i]}} src="https://i.imgur.com/Zrdtb9n.png"></Image>
+        <Image id="pantzLife" style={{opacity: props.opacity[i]}} src={pantzLifesrc}></Image>
       </Col>
     );
   }
+
+  // Change cursor depending on category
+  if(document.getElementsByClassName("body")[0].id != props.category + 'Body'){
+    document.getElementsByClassName("body")[0].id = props.category + 'Body'
+    }
+ 
 
   return (
     
     <Container className='gameView' id={props.category} fluid>
       {/* TOP-BAR. Includes: PantZ life*/}
-      <Row>
+      <Row id="topBar">
         <Col style={{marginTop: "4%"}} md={{span:2, offset:0}}>
           <Button variant="outline-danger" onClick={() => history.push('/')}>LEAVE GAME</Button>
           <h6></h6>
@@ -60,7 +72,8 @@ const GameView = (props) => {
             onHide={() => props.setModalShow(false)}
             message={props.message}
             setQ={props.setQ}
-            nextQuestion={props.nextQuestion}/>
+            nextQuestion={props.nextQuestion}
+            category={props.category}/>
         </Col>
       </Row>
     </Container>);

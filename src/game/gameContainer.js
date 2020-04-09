@@ -23,7 +23,7 @@ const Game = (props) => {
     const [statsMessage, setStatsMessage] = React.useState("");
 
     const nextQuestion = () => setQ(question + 1);
-
+    
     // Start countdown and reset score and lives first time
     React.useEffect(() => {
         props.setScore(0);

@@ -4,7 +4,9 @@ import {Modal, Button, Image} from 'react-bootstrap';
 function ResultModal(props) {
 
   if(props.message.result=='r'){
-    var imgsrc = 'f' + props.message.img +'.png';
+    if(props.category=='Rock'){
+      var imgsrc = 'fr' + props.message.img +'.png';
+    }else{var imgsrc = 'f' + props.message.img +'.png';}
   }else if(props.message.result=='w'){
     var imgsrc = 'b' + props.message.img +'.png';
   }else if(props.message.result=='t'){ 
@@ -23,7 +25,7 @@ function ResultModal(props) {
           {props.message.text}
         </Modal.Body>
         <Modal.Footer id={
-          props.message.result=='r'? 'r':'w'
+          (props.message.result=='r'&&props.category!='Rock')? 'r':(props.message.result=='r'&&props.category=='Rock')?'ro':'w'
           }>
         <Button 
         onClick={() => (
