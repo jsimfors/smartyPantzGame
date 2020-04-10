@@ -36,7 +36,7 @@ const StartView = (props) => {
               }}
             />
             <DropdownButton as={InputGroup.Append} variant="outline-danger" title={props.category}>
-                {["EDM", "Rock", "Hip-hop"].map((genre) => {
+                {["Category", "EDM", "Rock", "Hip-hop"].map((genre) => {
                     return <Dropdown.Item key={genre} onSelect={() => {
                         props.setCategory(genre);
                     }}>{genre}</Dropdown.Item>

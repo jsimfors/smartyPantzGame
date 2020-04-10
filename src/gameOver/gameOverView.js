@@ -6,7 +6,9 @@ import {useHistory} from 'react-router-dom';
 
 const GameOverView = (props) => {
   const history = useHistory();
-  
+
+  document.getElementsByClassName("body")[0].id = 'gameoverBody'
+
   return (
     <Container className="gameOverView">
       <Row>
@@ -26,7 +28,10 @@ const GameOverView = (props) => {
       </Row>
       <Row style={{marginTop: "1%"}}>
         <Col>
-          <Button style={{marginRight: "1%"}} variant="outline-dark" onClick={() => history.push('/')}>BACK TO START</Button>
+          <Button style={{marginRight: "1%"}} variant="outline-dark" onClick={function(e)
+            { history.push('/'); 
+            document.getElementsByClassName("body")[0].id = 'CategoryBody'
+            }}>BACK TO START</Button>
           <Button variant="outline-dark" onClick={() => history.push('/highscore')}>SEE HIGHSCORES</Button>
         </Col>
       </Row>

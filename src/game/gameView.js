@@ -5,11 +5,11 @@ import {useHistory} from 'react-router-dom';
 
 const GameView = (props) => {
   const history = useHistory();
-
+  var pantzLifesrc;
   // Change pantZlife img depending on category
-  if(props.category == 'Rock'){
-    var pantzLifesrc = require("../imgs/pantzRock.png");
-  }else{var pantzLifesrc="https://i.imgur.com/Zrdtb9n.png"
+  if(props.category === 'Rock'){
+    pantzLifesrc = require("../imgs/pantzRock.png");
+  }else{pantzLifesrc="https://i.imgur.com/Zrdtb9n.png"
   }
 
   // Lives
@@ -24,19 +24,24 @@ const GameView = (props) => {
   }
 
   // Change cursor depending on category
-  if(document.getElementsByClassName("body")[0].id != props.category + 'Body'){
+  if(document.getElementsByClassName("body")[0].id !== props.category + 'Body'){
     document.getElementsByClassName("body")[0].id = props.category + 'Body'
+    // document.getElementsByClassName("gameQuestion")[0].id = "gameQuestion" + props.category;
     }
- 
+ // change ID for images, so they change color:
+
 
   return (
     
     <Container className='gameView' id={props.category} fluid>
       {/* TOP-BAR. Includes: PantZ life*/}
-      <Row id="topBar">
+      <Row id={"topBar"+props.category}>
         <Col style={{marginTop: "4%"}} md={{span:2, offset:0}}>
-          <Button variant="outline-danger" onClick={() => history.push('/')}>LEAVE GAME</Button>
-          <h6></h6>
+          <Button variant="outline-danger" onClick={function(e)
+            { history.push('/'); 
+            document.getElementsByClassName("body")[0].id = 'CategoryBody'
+            }}>LEAVE GAME
+          </Button>
         </Col>
         <Col style={{marginTop: "4%"}} md={{span:2, offset:0}}>
           <h2>Score: {props.score}</h2>
@@ -51,7 +56,7 @@ const GameView = (props) => {
 
       <Row> {/* GAME HEADING */}
         <Col>
-        <Image id="gameQuestion" src={"https://i.imgur.com/lXXGtBV.png"} alt="" />
+        <Image className="gameQuestion" id={"gameQuestion"+props.category} src={"https://i.imgur.com/lXXGtBV.png"} alt="" />
         </Col>
       </Row>
       

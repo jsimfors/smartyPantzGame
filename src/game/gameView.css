@@ -6,7 +6,7 @@
     height: 100%;
   }
   
-  .gameView #gameQuestion {
+  .gameView .gameQuestion {
     margin-bottom: -30px; 
   }
   
@@ -57,41 +57,78 @@
   background-image: linear-gradient(120deg, #151515 0%, #272829 100%);
 }
 
-.gameView#Rock #topBar{
+.gameView#Rock #topBarRock{
   color: white;
 }
 
 /* HIP-HOP CATEGORY */
+
 .body#Hip-hopBody{
   cursor: url("../imgs/sockboiRock.png"), auto;
-  background-image: linear-gradient(120deg, #4e742a 0%, #95ff80 100%);
+  background-image: url("https://vectorcove.com/media/2013/833/final.jpg");
+  background-repeat: repeat;
+  background-attachment: fixed;
 }
 
+#topBarHip-hop{
+  background-color: rgba(255, 255, 255, 0.897);
+  border-radius: 70px;
+  -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+
+  margin-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+/* EDM CATEGORY */
 .body#EDMBody{
-  cursor: url("../imgs/sockboiRock.png"), auto;
-  background-image: linear-gradient(120deg, #ff43e3 0%, #550b32 100%);
+  cursor: url("../imgs/sockboiEDM2.png"), auto;
+  background-image: linear-gradient(180deg, #e700e7 0%, #4d0064 100%);
 }
 
+img#gameQuestionEDM{
+  filter: hue-rotate(-45deg);
+}
+
+#topBarEDM img{
+  filter: hue-rotate(90deg) brightness(90%) contrast(120%)
+}
+
+/* ORIGINAL */
 .body#CategoryBody{
   cursor: url("https://i.imgur.com/TlcA2Xs.png"), auto;
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 }
 
-/* MODAL */
+/* ------- MODAL -------- */
+
 .modal-content{
     border-radius: 35px;
   }
+
+.modal-body{
+  font-size: large;
+  text-align: center;
+}
   
-  .modal-footer#w button{
+/* MODAL: Rock & Original */
+
+.modal-footer#Categoryw button,  .modal-footer#Rockw button{
+    /* Wrong-answer button for default and rock theme */
     color: #520207;
     font-weight: bold;
     border-width: 3px;
     border-color: #520207;
     border-radius: 10px;
     background-image: linear-gradient(to top, #9a0003 0%, #fe5d65 100%);
-  }
+}
 
-  .modal-footer#ro button{
+  .modal-footer#Rockr button{
+    /* Correct-answer button for rock theme */
+
     color: #3b2f28;
     font-weight: bold;
     border-width: 3px;
@@ -100,7 +137,9 @@
     background-image: linear-gradient(to top, #ff7f02 0%, #fffe00 100%);
   }
   
-  .modal-footer#r button {
+  .modal-footer#Categoryr button {
+    /* Correct-answer button for default theme */
+
     color: #305152;
     font-weight: bold;
     border-width: 3px;
@@ -109,8 +148,60 @@
     background-image: linear-gradient(to top, #31be95 0%, #76f5d0 100%);
   }
   
-  
-  .modal-body{
-    font-size: large;
-    text-align: center;
+/* EDM MODAL */
+.modal-footer#EDMw button{
+  color: #260031;
+  font-weight: bold;
+  border-width: 3px;
+  border-color: #4d0064;
+  border-radius: 10px;
+  background-image: linear-gradient(180deg, #e700c1 0%, #55004a 100%);
+}
+
+.modal-footer#EDMr button{
+  color: #0c6b09;
+  font-weight: bold;
+  border-width: 3px;
+  border-color: #0c6b09;
+  border-radius: 10px;
+  background-image: linear-gradient(to top, #00cc0a 0%, #6fff1c 100%);
+}
+
+  .modal-body#modalEDM #titlew, #titlet{
+    /* Styling for: EDM-theme: when wrong answer */
+    filter: hue-rotate(-40deg)
+  }
+
+  .modal-body#modalEDM #titler{
+        /* Styling for: EDM-theme: when correct answer */
+    filter: hue-rotate(-50deg)
+  }
+
+  /* HIP-HOP MODAL */
+  .modal-footer#Hip-hopw button, .modal-footer#Hip-hopt button{
+    color: #520207;
+    font-weight: bold;
+    border-width: 3px;
+    border-color: #520207;
+    border-radius: 10px;
+    background-image: linear-gradient(to top, #9a0003 0%, #fe5d65 100%);
+}
+
+.modal-footer#Hip-hopr button{
+  color: #503416;
+  font-weight: bold;
+  border-width: 3px;
+  border-color: #503416;
+  border-radius: 10px;
+  background-image: linear-gradient(to top, #94571e 0%, #ee9c3f 100%);
+}
+
+
+.modal-body#modalHip-hop #titlew, #titlet{
+  /* Styling for: EDM-theme: when wrong answer */
+  filter: hue-rotate(0deg)
+}
+  .modal-body#modalHip-hop #titler{
+        /* Styling for: EDM-theme: when correct answer */
+    filter: hue-rotate(220deg) contrast(120%) brightness(90%)
   }

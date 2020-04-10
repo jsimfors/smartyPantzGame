@@ -10,7 +10,11 @@ const HighScoreView = (props) => {
             <Row style={{marginTop: "2%"}}>
                 <Col md={{span:2, offset:0}}>
                     <Row style={{marginTop: "30%"}}>
-                        <Button variant="outline-danger" onClick={() => history.push('/')}>BACK TO START</Button>
+                        <Button variant="outline-danger" onClick={function(e)
+                            { history.push('/'); 
+                            document.getElementsByClassName("body")[0].id = 'CategoryBody'
+                            }}>BACK TO START
+                        </Button>
                     </Row>
                 </Col>
                 <Col md={{span:8, offset:0}}>
