@@ -6,6 +6,7 @@ import {useHistory} from 'react-router-dom';
 const GameView = (props) => {
   const history = useHistory();
   var pantzLifesrc;
+
   // Change pantZlife img depending on category
   if(props.category === 'Rock'){
     pantzLifesrc = require("../imgs/pantzRock.png");
@@ -26,10 +27,10 @@ const GameView = (props) => {
   // Change cursor depending on category
   if(document.getElementsByClassName("body")[0].id !== props.category + 'Body'){
     document.getElementsByClassName("body")[0].id = props.category + 'Body'
-    // document.getElementsByClassName("gameQuestion")[0].id = "gameQuestion" + props.category;
     }
- // change ID for images, so they change color:
 
+
+  
 
   return (
     
@@ -53,18 +54,9 @@ const GameView = (props) => {
       </Row>
 
       <Row><Col>{props.statsMessage}</Col></Row>
-
-      <Row> {/* GAME HEADING */}
-        <Col>
-        <Image className="gameQuestion" id={"gameQuestion"+props.category} src={"https://i.imgur.com/lXXGtBV.png"} alt="" />
-        </Col>
-      </Row>
-      
-      <Row id="gamePlay">  {/* GAME PLAY */}
-        <Col style={{height: "350px"}}>
           {options(props)}
-        </Col>
-      </Row>
+
+      
       <Row style={{marginTop: "2%"}}>
         <Col md={{span: 8, offset: 2}}>
           <ProgressBar animated striped variant="danger" now={(props.countdown > 0 ? 100 : props.time)}/>
@@ -85,35 +77,76 @@ const GameView = (props) => {
 }
 
 const options = (props) => {
+
   if (props.countdown > 0) {
     return (<div>
+            <Row id="gamePlay">  {/* GAME PLAY */}
+        <Col style={{height: "350px"}}>
       <h2>Get ready</h2>
       <h1 className="h0" >{props.countdown}</h1>
+      </Col>
+      </Row>
     </div>)
   } else {
     return (<div>
-      <Row>
-        <Col md={{span:3, offset:2}}>
-        <h4>{props.track1?props.track1.name:null}</h4>
-        </Col>
-        <Col md={{span:3, offset:2}}>
-        <h4>{props.track2?props.track2.name:null}</h4>
+
+    
+      <Row> {/* GAME HEADING */}
+        <Col>
+        <Image className="gameQuestion" id={"gameQuestion"+props.category} src={require('../imgs/' + "question" + props.questionType + ".png")} alt="" />
         </Col>
       </Row>
-      <Row>
-        <Col md={{span:3, offset:2}}>
-          <Image src={props.track1?props.track1.album.images["0"].url:null}  onClick={() => props.checkAnswer(props.track1)} alt="" />
-          <Row><Col>By {props.track1?props.track1.artists[0].name:null}</Col></Row>
 
-        </Col>
-        <Col md={{span:3, offset:2}}>
-          <Image src={props.track2?props.track2.album.images["0"].url:null} onClick={() => props.checkAnswer(props.track2)} alt="" />
-          <Row><Col>By {props.track2?props.track2.artists[0].name:null}</Col></Row>
-
-        </Col>
+      <Row id="gamePlay">  {/* GAME PLAY */}
+        <Col style={{height: "350px"}}>
+        {props.questionType=="Artist"?optionsArtist(props):optionsTrack(props)}
+      </Col>
       </Row>
     </div>)
   }
+}
+
+const optionsArtist = (props) => {
+  return (<div>
+    <Row>
+        <Col md={{span:3, offset:2}}>
+        <h4>{props.artist1?props.artist1.name:null}</h4>
+        </Col>
+        <Col md={{span:3, offset:2}}>
+        <h4>{props.artist2?props.artist2.name:null}</h4>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={{span:3, offset:2}}>
+          <Image src={props.artist1?props.artist1.imgsrc:null}  onClick={() => props.checkAnswer(props.artist1, props.artist2)} alt="" />
+        </Col>
+        <Col md={{span:3, offset:2}}>
+          <Image src={props.artist1?props.artist2.imgsrc:null} onClick={() => props.checkAnswer(props.artist2, props.artist1)} alt="" />
+        </Col>
+      </Row>
+  </div>)
+}
+
+const optionsTrack = (props) => {
+  return (<div>
+    <Row>
+    <Col md={{span:3, offset:2}}>
+    <h4>{props.track1?props.track1.name:null}</h4>
+    </Col>
+    <Col md={{span:3, offset:2}}>
+    <h4>{props.track2?props.track2.name:null}</h4>
+    </Col>
+  </Row>
+  <Row>
+    <Col md={{span:3, offset:2}}>
+      <Image src={props.track1?props.track1.album.images["0"].url:null}  onClick={() => props.checkAnswer(props.track1, props.track2)} alt="" />
+      <Row><Col>By {props.track1?props.track1.artists[0].name:null}</Col></Row>
+    </Col>
+    <Col md={{span:3, offset:2}}>
+      <Image src={props.track2?props.track2.album.images["0"].url:null} onClick={() => props.checkAnswer(props.track2, props.track1)} alt="" />
+      <Row><Col>By {props.track2?props.track2.artists[0].name:null}</Col></Row>
+    </Col>
+  </Row></div>)
 }
 
 export default GameView;

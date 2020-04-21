@@ -1,35 +1,35 @@
 Allmänt:
 X   Knappar för att navigera
-Spara användarnamnet i session, så man slipper skriva in det varje ny match
 X   Man ska inte kunna gå tillbaka och få tillbaka sitt liv
-The layout is not very responsive ?
-Skapa kategorier efter musikstil som man väljer innan man börjar och fixa olika highscore-listor för olika kategorier
 X   Töm databasen på alla keffa highscores
+Göra den snygg och fungerande för mobilen
+X   Fler highscore-listor baserat på kategorier
+Oavsett var man refreshar så borde man komma till startsidan
+Det ska borde inte gå att gå in på gameover via address baren
 
 StartView:
 X   "I think the start button could be a bit more distinct than the high score button is at the moment."
 
 GameView:
 X   Visa hur många poäng man har
-Kanske även skriva ut artist vid låtarna man gissar på?
+X   Kanske även skriva ut artist vid låtarna man gissar på?
 X   Förhindra att två av samma låt kommer upp
 X   Kanske skriva ut hur populära låtarna va
 X   Skriv ut att byxorna representerar liv
 X   Frågorna borde gå på tid, så att man inte hinner söka upp svaret
 X   Fixa så att bilderna hamnar på samma nivå oavsett textlängd (kanske byta plats på text och bild)
 X   gameview inte centrerad när den är deployad (fel i ordningen vi importerar bootstrap)
-Sidan är fortfarande riktigt skev i Safari
+X   Sidan är fortfarande riktigt skev i Safari
 X   Countdown innan man börjar så man hinner se score, liv och timebar och gör sig bekant med vyn
 X   Göra det tydligare om man svarat rätt eller fel på en fråga (man är under stress och hinner ej läsa där nere), kanske genom att göra bakgrunden röd/grön i någon sekund
 X   Pop-up ruta med resultat + knapp för nästa fråga
 X   Fixa så timer-baren inte startar förrän användaren klickat på "nästa fråga"-knappen
-Spinner innan bilderna visas?
-Fixa så att vita rutan har statisk storlek med undantag om texterna är på för många rader
+Fixa så att vita rutan har statisk storlek med undantag om texterna är på för många rader!!
 
 Möte med Klara:
 Visa statistik på hur andra har svarat + spara i databasen
 Kategorier + välja en egen spellista
-Fler typer av frågor
+X   Fler typer av frågor
 Felmeddelanden - Visa för användaren i UIt vad som gått fel vid t.ex. om det inte går att hämta data från APIt
 Spinners
 Konton?
@@ -37,7 +37,7 @@ Konton?
 Highscore view:
 X   mindre titel?
 X   asså inte skitnajs att man själv kan fylla i highscoren, DÅ KOMMER JU FOLK FUSKA
-fixa spinner
+X   fixa spinner
 
 GameoverView:
 X   Här fastnar folk nu :-)

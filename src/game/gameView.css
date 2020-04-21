@@ -61,10 +61,10 @@
   color: white;
 }
 
-/* HIP-HOP CATEGORY */
+/* HIP-HOP Hits */
 
 .body#Hip-hopBody{
-  cursor: url("../imgs/sockboiRock.png"), auto;
+  cursor: url("https://i.imgur.com/TlcA2Xs.png"), auto;
   background-image: url("https://vectorcove.com/media/2013/833/final.jpg");
   background-repeat: repeat;
   background-attachment: fixed;
@@ -83,7 +83,7 @@
 }
 
 
-/* EDM CATEGORY */
+/* EDM Hits */
 .body#EDMBody{
   cursor: url("../imgs/sockboiEDM2.png"), auto;
   background-image: linear-gradient(180deg, #e700e7 0%, #4d0064 100%);
@@ -98,7 +98,7 @@ img#gameQuestionEDM{
 }
 
 /* ORIGINAL */
-.body#CategoryBody{
+.body#HitsBody{
   cursor: url("https://i.imgur.com/TlcA2Xs.png"), auto;
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 }
@@ -116,7 +116,7 @@ img#gameQuestionEDM{
   
 /* MODAL: Rock & Original */
 
-.modal-footer#Categoryw button,  .modal-footer#Rockw button{
+.modal-footer#Hitsw button, .modal-footer#Hitst button,  .modal-footer#Rockw button, .modal-footer#Rockt button{
     /* Wrong-answer button for default and rock theme */
     color: #520207;
     font-weight: bold;
@@ -137,7 +137,7 @@ img#gameQuestionEDM{
     background-image: linear-gradient(to top, #ff7f02 0%, #fffe00 100%);
   }
   
-  .modal-footer#Categoryr button {
+  .modal-footer#Hitsr button {
     /* Correct-answer button for default theme */
 
     color: #305152;

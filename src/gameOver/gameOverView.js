@@ -16,6 +16,7 @@ const GameOverView = (props) => {
           <Image src="https://imgur.com/BJKeDIh.png"></Image>
         </Col>
       </Row>
+      <Row><Col>{props.highscoreMessage}</Col></Row>
       <Row>
         <Col>
           <div className="infotext">Score: {props.score}</div>

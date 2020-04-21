@@ -1,6 +1,6 @@
 const defaultLives = 3;
 
-const reducer = (state = {username: "", score: 0, lives: defaultLives, category: "Category"}, action) => {
+const reducer = (state = {username: "", score: 0, lives: defaultLives, category: "Hits"}, action) => {
   switch (action.type) {
     case 'SET_USERNAME':
         console.log({username: action.username, score: state.score, lives: state.lives, category: state.category});
