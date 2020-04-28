@@ -14,13 +14,10 @@ const GameView = (props) => {
   }
 
   // Lives
-  var xsOffset = [6, 0, 0];
   var lifeCols = [];
   for (let i = 0; i < 3; i++) {
     lifeCols.push(
-      <Col key={i} md={{span:1, offset:0}} xs={{span:2, offset:xsOffset[i]}}>
-        <Image id="pantzLife" style={{opacity: props.opacity[i]}} src={pantzLifesrc}></Image>
-      </Col>
+        <Image id="pantzLife" style={{opacity: props.opacity[i]}} src={pantzLifesrc} key={i} ></Image>
     );
   }
 
@@ -37,20 +34,22 @@ const GameView = (props) => {
     <Container className='gameView' id={props.category} fluid>
       {/* TOP-BAR. Includes: PantZ life*/}
       <Row id={"topBar"+props.category}>
-        <Col style={{marginTop: "4%"}} md={{span:2, offset:0}}>
-          <Button variant="outline-danger" onClick={function(e)
-            { history.push('/'); 
-            document.getElementsByClassName("body")[0].id = 'CategoryBody'
-            }}>LEAVE GAME
+        <Col>
+          <Button variant="outline-danger" onClick={() => history.push('/')}>
+            LEAVE GAME
           </Button>
         </Col>
-        <Col style={{marginTop: "4%"}} md={{span:2, offset:0}}>
-          <h2>Score: {props.score}</h2>
+        <Col>
+          <Row>
+            <div id="scoreText" >Score: {props.score}</div>
+          </Row>
         </Col>
-        <Col style={{marginTop: "4%"}} md={{span:1, offset:4}}>
-          <h2>Lives: </h2>
+
+        <Col  xs={{span:6}} sm={{span:8, offset:0}} md={{offset:1}}>
+          <Row id="livesText">
+            Lives: {lifeCols}
+            </Row>
         </Col>
-        {lifeCols}
       </Row>
 
       <Row><Col>{props.statsMessage}</Col></Row>
@@ -58,18 +57,16 @@ const GameView = (props) => {
 
       
       <Row style={{marginTop: "2%"}}>
-        <Col md={{span: 8, offset: 2}}>
+        <Col>
           <ProgressBar animated striped variant="danger" now={(props.countdown > 0 ? 100 : props.time)}/>
         </Col>
       </Row>
-      <Row> {/* MESSAGE RÄTT/FEL */}
+      <Row>
         <Col>
           <ResultModal
             show={props.modalShow}
             onHide={() => props.setModalShow(false)}
             message={props.message}
-            setQ={props.setQ}
-            nextQuestion={props.nextQuestion}
             category={props.category}/>
         </Col>
       </Row>
@@ -77,50 +74,46 @@ const GameView = (props) => {
 }
 
 const options = (props) => {
-
   if (props.countdown > 0) {
     return (<div>
-            <Row id="gamePlay">  {/* GAME PLAY */}
-        <Col style={{height: "350px"}}>
-      <h2>Get ready</h2>
-      <h1 className="h0" >{props.countdown}</h1>
-      </Col>
-      </Row>
-    </div>)
-  } else {
-    return (<div>
-
-    
-      <Row> {/* GAME HEADING */}
+      <Row> {/* COUNT DOWN */}
         <Col>
-        <Image className="gameQuestion" id={"gameQuestion"+props.category} src={require('../imgs/' + "question" + props.questionType + ".png")} alt="" />
+          <h2>Get ready</h2>
+          <h1 className="h0" >{props.countdown}</h1>
         </Col>
       </Row>
-
-      <Row id="gamePlay">  {/* GAME PLAY */}
-        <Col style={{height: "350px"}}>
-        {props.questionType=="Artist"?optionsArtist(props):optionsTrack(props)}
-      </Col>
+    </div>);
+  } else {
+    return (<div>
+      <Row> {/* GAME HEADING */}
+        <Col>
+        <Image className="gameQuestion" id={"gameQuestion"+props.category} src={require('../imgs/question' + props.questionType + '.png')} alt="" />
+        </Col>
       </Row>
-    </div>)
+      <Row id="gamePlay">  {/* GAME PLAY */}
+        <Col>
+          {props.questionType==="Artist"?optionsArtist(props):optionsTrack(props)}
+        </Col>
+      </Row>
+    </div>);
   }
 }
 
 const optionsArtist = (props) => {
   return (<div>
     <Row>
-        <Col md={{span:3, offset:2}}>
-        <h4>{props.artist1?props.artist1.name:null}</h4>
+        <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
+        <div className="optionsText">{props.artist1?props.artist1.name:null}</div>
         </Col>
-        <Col md={{span:3, offset:2}}>
-        <h4>{props.artist2?props.artist2.name:null}</h4>
+        <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
+        <div className="optionsText">{props.artist2?props.artist2.name:null}</div>
         </Col>
       </Row>
       <Row>
-        <Col md={{span:3, offset:2}}>
+        <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
           <Image src={props.artist1?props.artist1.imgsrc:null}  onClick={() => props.checkAnswer(props.artist1, props.artist2)} alt="" />
         </Col>
-        <Col md={{span:3, offset:2}}>
+        <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
           <Image src={props.artist1?props.artist2.imgsrc:null} onClick={() => props.checkAnswer(props.artist2, props.artist1)} alt="" />
         </Col>
       </Row>
@@ -130,19 +123,19 @@ const optionsArtist = (props) => {
 const optionsTrack = (props) => {
   return (<div>
     <Row>
-    <Col md={{span:3, offset:2}}>
-    <h4>{props.track1?props.track1.name:null}</h4>
+    <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
+    <div className="optionsText">{props.track1?props.track1.name:null}</div>
     </Col>
-    <Col md={{span:3, offset:2}}>
-    <h4>{props.track2?props.track2.name:null}</h4>
+    <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
+    <div className="optionsText">{props.track2?props.track2.name:null}</div>
     </Col>
   </Row>
   <Row>
-    <Col md={{span:3, offset:2}}>
+    <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
       <Image src={props.track1?props.track1.album.images["0"].url:null}  onClick={() => props.checkAnswer(props.track1, props.track2)} alt="" />
       <Row><Col>By {props.track1?props.track1.artists[0].name:null}</Col></Row>
     </Col>
-    <Col md={{span:3, offset:2}}>
+    <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
       <Image src={props.track2?props.track2.album.images["0"].url:null} onClick={() => props.checkAnswer(props.track2, props.track1)} alt="" />
       <Row><Col>By {props.track2?props.track2.artists[0].name:null}</Col></Row>
     </Col>

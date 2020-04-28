@@ -28,10 +28,7 @@ function ResultModal(props) {
           // (props.message.result==='r'&&props.category!=='Rock')? 'r':(props.message.result==='r'&&props.category==='Rock')?'ro':'w'
           }>
         <Button 
-        onClick={() => (
-            props.nextQuestion(),
-            props.onHide()
-        )}>
+        onClick={() => props.onHide()}>
         NEXT QUESTION
       </Button>
         </Modal.Footer>

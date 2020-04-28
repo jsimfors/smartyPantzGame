@@ -9,6 +9,10 @@ const HighScoreContainer = () => {
     const [rockScores, setRockScores] = React.useState([]);
     const [hiphopScores, setHiphopScores] = React.useState([]);
     React.useEffect(()=>{
+        // Make sure the background is correct
+        document.getElementsByClassName("body")[0].id = 'CategoryBody';
+
+        // Fetch all highscore lists from the database
         getAllScores(setAllScores);
         getCategoryScores(setHitsScores, "Hits");
         getCategoryScores(setEDMScores, "EDM");
