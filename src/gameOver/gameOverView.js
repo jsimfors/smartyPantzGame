@@ -7,16 +7,20 @@ import {useHistory} from 'react-router-dom';
 const GameOverView = (props) => {
   const history = useHistory();
 
-  document.getElementsByClassName("body")[0].id = 'gameoverBody'
 
   return (
+
     <Container className="gameOverView">
-      <Row>
-        <Col md={{span:6, offset:3}}>
-          <Image src="https://imgur.com/BJKeDIh.png"></Image>
+     <Row>
+        <Col>
+          <Image src="https://i.imgur.com/qA66fUX.png"></Image>
         </Col>
       </Row>
-      <Row><Col>{props.highscoreMessage}</Col></Row>
+      <Row>
+        <Col id="highScoreMessage">
+          {props.highscoreMessage}
+        </Col>
+      </Row>
       <Row>
         <Col>
           <div className="infotext">Score: {props.score}</div>
@@ -33,7 +37,10 @@ const GameOverView = (props) => {
             { history.push('/'); 
             document.getElementsByClassName("body")[0].id = 'CategoryBody'
             }}>BACK TO START</Button>
-          <Button variant="outline-dark" onClick={() => history.push('/highscore')}>SEE HIGHSCORES</Button>
+          <Button variant="outline-dark" onClick={function(e) 
+            {history.push('/highscore')
+            document.getElementsByClassName("body")[0].id = 'CategoryBody'
+            }}>SEE HIGHSCORES</Button>
         </Col>
       </Row>
     </Container>);

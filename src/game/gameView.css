@@ -9,15 +9,20 @@
   .gameView .gameQuestion {
     margin-bottom: -30px; 
   }
-  
+ 
   .gameView img {
     max-width: 100%;
     border-radius: 15px;
+
   }
   
-  #pantzLife {
-    margin-top:40px;
-    margin-bottom: 40px;
+ #pantzLife {
+    max-width: 100px;
+    max-height: 100px;
+  } 
+
+  #topBarHip-hop, #topBarHits, #topBarEDM, #topBarRock {
+    margin-top: 5%;
   }
   
   .h0 {
@@ -28,28 +33,74 @@
     margin: 10px;
     font-size: large;
   }
-  
-  /* White box with the actuall game */
-  #gamePlay {
-    background-color: rgba(255, 255, 255, 0.897);
-    padding: 20px;
-    padding-top:50px;
-    border-radius: 70px;
-    -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-  }
-  
-  .gameView h5{
-    text-align: center;
-  }
-  
-  #gamePlay img {
-    -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-  }
 
+    /* White box with the actuall game */
+    #gamePlay {
+      background-color: rgba(255, 255, 255, 0.897);
+      padding: 20px;
+      padding-top:50px;
+      border-radius: 70px;
+      -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+      box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+    }
+    
+    #gamePlay img {
+      -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+      box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+    }
+  
+
+/* FOR MOBILE DEVICES: */  
+  @media only screen and (max-width: 600px) {
+    .container-fluid{
+      padding-left: 2em;
+      padding-right: 2em;
+      padding-top: 0px;
+      margin-bottom: -10px;
+    }
+    #pantzLife {
+      max-width: 40px;
+      max-height: 40px;
+    }
+    .optionsText{
+      font-weight: bold;
+    }
+
+    #gamePlay{
+      display: inline-block;
+    }
+
+}
+
+
+/* FOR STYLING UNIQUE FOR DESKTOP : */  
+@media only screen and (min-width: 600px) {
+  #topBarHip-hop, #topBarHits, #topBarEDM, #topBarRock {
+    margin-bottom: 2%;
+  }
+  #livesText {
+    font-size: x-large;
+    font-weight: bold;
+    text-align: right;
+  } 
+  #scoreText{
+    font-size: x-large;
+    font-weight: bold;
+  }
+  .optionsText{
+    font-size: x-large;
+    font-weight: bold;
+  }
+}
+  
+@media only screen and (min-width: 600px) and (max-width: 1100px) {
+  #pantzLife {
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
 /* ROCK CATHEGORY */
 
 .body#RockBody{

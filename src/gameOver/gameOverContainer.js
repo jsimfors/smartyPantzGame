@@ -14,18 +14,34 @@ const GameOverContainer = (props) => {
             setHighscoreMessage(getHighscoreMessage(props.score, tenthScore));
         });
     }, []);
-    return <GameOverView highscoreMessage={highscoreMessage}/>;
+    return <GameOverView highscoreMessage={highscoreMessage}
+    score={props.score}
+    />;
 };
 
 function getHighscoreMessage(currentScore, tenthScore) {
+    var body = document.getElementsByClassName("body")[0];
+    console.log(body.id)
+
     var message = "";
     if (currentScore > tenthScore) {
-        message = "Congratulations, you got on the highscore list! :D";
+        message = "Congratulations, you made it to the highscore list :D";
+        body.id = 'winningBody';
+        var i;
+        for (i = 0; i < 20; i++) {
+            var confettiPiece = document.createElement("div");
+            confettiPiece.className = "confetti"
+            body.insertBefore(confettiPiece, body.firstChild)
+        }
     } else {
-        message = "Sadly you didn't get on the highscore list. :(";
+        message = "Sadly you didn't get on the highscore list :(";
+        body.id = 'losingBody';
     }
     return message;
 }
+
+
+
 
 const mapStateToProps = state => ({
     score: state.score,

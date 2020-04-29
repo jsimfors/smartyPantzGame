@@ -199,8 +199,7 @@ function getApiPlaylist(category, client_id, client_secret, setTrack1, setTrack2
 }
 
 function checkAnswer(trackChosen, trackOther, username, category, score, setScore, lives, setLives, setMessage, history, setModalShow) {
-    console.log("Track chosen: " + trackChosen.name)
-    console.log("Track other: " + trackOther.name)
+
     if (trackChosen !== null && trackChosen.popularity>trackOther.popularity) {
         setScore(score + 1);
         var i = Math.floor(Math.random() * 5) + 1;
@@ -212,10 +211,12 @@ function checkAnswer(trackChosen, trackOther, username, category, score, setScor
             var i = Math.floor(Math.random() * 6) + 1;
             setMessage({result: 'w', text: <div><i>{trackChosen.name}</i> has popularity <b>{trackChosen.popularity}%</b> and <i>{trackOther.name}</i> <b>{trackOther.popularity}%</b></div>, img: i});
         }        
-        else setMessage({result: 't',text: <div>You didn't make it in time.</div>, img:'1'});
+        else {
+            setMessage({result: 't',text: <div>You didn't make it in time.</div>, img:'1'});   
+        }
 
         if (lives > 1) {
-            setLives(lives - 1);
+            setLives(lives-1);
         } else {
             db.collection("highscore").add({
                 name: username,
