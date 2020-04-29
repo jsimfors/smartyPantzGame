@@ -2,6 +2,7 @@ import React from 'react';
 import {Col, Row, Image, Table, Container, Button, Spinner} from 'react-bootstrap';
 import {useHistory} from 'react-router-dom';
 
+
 const HighScoreView = (props) => {
     const history = useHistory();
 
@@ -9,7 +10,7 @@ const HighScoreView = (props) => {
         <Container className="highScoreView">
             <Row style={{marginTop: "2%"}}>
                 <Col md={{span:2, offset:0}}>
-                    <Row style={{marginTop: "30%"}}>
+                    <Row style={{marginTop: "10%"}}>
                         <Button variant="outline-danger" onClick={function(e)
                             { history.push('/'); 
                             document.getElementsByClassName("body")[0].id = 'CategoryBody'
@@ -21,7 +22,7 @@ const HighScoreView = (props) => {
                     <Image src={"https://i.imgur.com/nbrayQO.png"} alt="" />
                 </Col>
             </Row>
-            <Row style={{marginTop: "4%"}}>
+            <Row style={{marginTop: "10%"}}>
                 <Col md={{span:6, offset:3}}>
                     <Row className="justify-content-center">
                         <h2>All categories</h2>

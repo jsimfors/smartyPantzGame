@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Start from './start/startContainer.js';
 import Game from './game/gameContainer.js';
 import GameOver from './gameOver/gameOverContainer.js';
-import HighScoreContainer from './highScore/highScoreContainer.js';
+import HighScore from './highScore/highScoreContainer.js';
 
 const App = () => (
   <Router>
@@ -18,7 +18,7 @@ const App = () => (
           <GameOver/>
         </Route>
         <Route exact path="/highscore">
-          <HighScoreContainer/>
+          <HighScore/>
         </Route>
     </Switch>
   </Router>

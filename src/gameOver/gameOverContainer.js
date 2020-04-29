@@ -2,11 +2,17 @@ import GameOverView from './gameOverView.js'
 import {connect} from 'react-redux';
 import React from 'react';
 import {db} from '../util/dbConfig.js';
+import {useHistory} from 'react-router-dom';
 
 const GameOverContainer = (props) => {
+    const history = useHistory();
     const [highscoreMessage, setHighscoreMessage] = React.useState("");
+
     React.useEffect(()=>{
-        db.collection("highscore").orderBy("score", "desc").limit(10).get()
+        // If the user is reloading they should be directed to start page
+        if (props.username === "") history.push('/');
+
+        db.collection("highscore").where("category", "==", props.category).orderBy("score", "desc").limit(10).get()
         .then((querySnapshot) => {
             var queryDocs = querySnapshot.docs;
             var lastDoc = queryDocs[queryDocs.length - 1];
@@ -15,8 +21,7 @@ const GameOverContainer = (props) => {
         });
     }, []);
     return <GameOverView highscoreMessage={highscoreMessage}
-    score={props.score}
-    />;
+    score={props.score}/>;
 };
 
 function getHighscoreMessage(currentScore, tenthScore) {
@@ -45,6 +50,8 @@ function getHighscoreMessage(currentScore, tenthScore) {
 
 const mapStateToProps = state => ({
     score: state.score,
+    username: state.username,
+    category: state.category
 });
 
 export default connect(mapStateToProps)(GameOverContainer);

@@ -4,8 +4,8 @@ X   Man ska inte kunna gå tillbaka och få tillbaka sitt liv
 X   Töm databasen på alla keffa highscores
 Göra den snygg och fungerande för mobilen
 X   Fler highscore-listor baserat på kategorier
-Oavsett var man refreshar så borde man komma till startsidan
-Det ska borde inte gå att gå in på gameover via address baren
+X   Oavsett var man refreshar så borde man komma till startsidan
+X   Det ska borde inte gå att gå in på game/gameover via address baren
 
 StartView:
 X   "I think the start button could be a bit more distinct than the high score button is at the moment."
@@ -24,29 +24,35 @@ X   Countdown innan man börjar så man hinner se score, liv och timebar och gö
 X   Göra det tydligare om man svarat rätt eller fel på en fråga (man är under stress och hinner ej läsa där nere), kanske genom att göra bakgrunden röd/grön i någon sekund
 X   Pop-up ruta med resultat + knapp för nästa fråga
 X   Fixa så timer-baren inte startar förrän användaren klickat på "nästa fråga"-knappen
-Fixa så att vita rutan har statisk storlek med undantag om texterna är på för många rader!!
+Fixa så att den inte laddar om för artistfrågan - Melvin fixar - Note to self: Ta bort questionType-statet och gör viewn beroende av om båda tracks/artists blir null och byt i så fall.
+X   Ska bli rätt om de är lika populära (eller undvik det fallet helt?)
 
 Möte med Klara:
-Visa statistik på hur andra har svarat + spara i databasen
-Kategorier + välja en egen spellista
+X   Kategorier
 X   Fler typer av frågor
 Felmeddelanden - Visa för användaren i UIt vad som gått fel vid t.ex. om det inte går att hämta data från APIt
-Spinners
-Konton?
+X   Spinners
 
 Highscore view:
 X   mindre titel?
 X   asså inte skitnajs att man själv kan fylla i highscoren, DÅ KOMMER JU FOLK FUSKA
 X   fixa spinner
+X   Fixa så den inte är röd när man kommer från gameover?
 
 GameoverView:
 X   Här fastnar folk nu :-)
 X   Visa score
-Visa om man hamnat på highscore-listan!
+X   Visa om man hamnat på highscore-listan! (SPECIFIKT FÖR KATEGORI)
 X   Snygg "You lost" eller liknande
 X   Knapp till highscoren
+Inte blixtra till vanlig bakgrund innan
+Ta bort confetti när man går vidare
 
 Kod:
 Se till att namngivning är helt konsekvent
 X   Redux? Maybe use a provider to have state “at the side” passed to the tree via context
 X   Look at the connect, mapStateToProps and mapDispatchToProps functions
+
+Framtida eventuella förbättringar:
+Konton
+Visa statistik på hur andra har svarat på frågor + spara i databasen

@@ -14,11 +14,10 @@ const GameView = (props) => {
   }
 
   // Lives
-  var xsOffset = [6, 0, 0];
   var lifeCols = [];
   for (let i = 0; i < 3; i++) {
     lifeCols.push(
-        <Image id="pantzLife" style={{opacity: props.opacity[i]}} src={pantzLifesrc}  key={i}></Image>
+        <Image id="pantzLife" style={{opacity: props.opacity[i]}} src={pantzLifesrc} key={i} ></Image>
     );
   }
 
@@ -32,11 +31,9 @@ const GameView = (props) => {
     <Container className='gameView' id={props.category} fluid> 
     
       <Row id={"topBar"+props.category}>
-        <Col> 
-          <Button variant="outline-danger" onClick={function(e)
-            { history.push('/'); 
-            document.getElementsByClassName("body")[0].id = 'CategoryBody'
-            }}>LEAVE GAME
+        <Col>
+          <Button variant="outline-danger" onClick={() => history.push('/')}>
+            LEAVE GAME
           </Button>
         </Col>
         <Col>
@@ -45,10 +42,10 @@ const GameView = (props) => {
           </Row>
         </Col>
 
-        <Col xs={{span:6}} sm={{span:8, offset:0}} md={{offset:1}}>
+        <Col  xs={{span:6}} sm={{span:8, offset:0}} md={{offset:1}}>
           <Row id="livesText">
             Lives: {lifeCols}
-          </Row>
+            </Row>
         </Col>
       </Row>
 
@@ -67,8 +64,6 @@ const GameView = (props) => {
             show={props.modalShow}
             onHide={() => props.setModalShow(false)}
             message={props.message}
-            setQ={props.setQ}
-            nextQuestion={props.nextQuestion}
             category={props.category}/>
         </Col>
       </Row>
@@ -76,48 +71,43 @@ const GameView = (props) => {
 }
 
 const options = (props) => {
-
   if (props.countdown > 0) {
     return (<div>
-            <Row id="gamePlay"> 
+      <Row> {/* COUNT DOWN */}
         <Col>
-      <h2>Get ready</h2>
-      <h1 className="h0" >{props.countdown}</h1>
-      </Col>
-      </Row>
-    </div>)
-  } else {
-    return (<div>
-
-    
-      <Row> {/* GAME HEADING */}
-        <Col>
-        <Image className="gameQuestion" id={"gameQuestion"+props.category} src={require('../imgs/' + "question" + props.questionType + ".png")} alt="" />
+          <h2>Get ready</h2>
+          <h1 className="h0" >{props.countdown}</h1>
         </Col>
       </Row>
-
+    </div>);
+  } else {
+    return (<div>
+      <Row> {/* GAME HEADING */}
+        <Col>
+        <Image className="gameQuestion" id={"gameQuestion"+props.category} src={require('../imgs/question' + props.questionType + '.png')} alt="" />
+        </Col>
+      </Row>
       <Row id="gamePlay">  {/* GAME PLAY */}
         <Col>
-        {props.questionType=="Artist"?optionsArtist(props):optionsTrack(props)}
-      </Col>
+          {props.questionType==="Artist"?optionsArtist(props):optionsTrack(props)}
+        </Col>
       </Row>
-      
-    </div>)
+    </div>);
   }
 }
 
 const optionsArtist = (props) => {
   return (<div>
     <Row>
-    <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
-        <div class="optionsText">{props.artist1?props.artist1.name:null}</div>
+        <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
+        <div className="optionsText">{props.artist1?props.artist1.name:null}</div>
         </Col>
         <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
-        <div class="optionsText">{props.artist2?props.artist2.name:null}</div>
+        <div className="optionsText">{props.artist2?props.artist2.name:null}</div>
         </Col>
       </Row>
       <Row>
-      <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
+        <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
           <Image src={props.artist1?props.artist1.imgsrc:null}  onClick={() => props.checkAnswer(props.artist1, props.artist2)} alt="" />
         </Col>
         <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
@@ -131,14 +121,14 @@ const optionsTrack = (props) => {
   return (<div>
     <Row>
     <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
-    <div class="optionsText">{props.track1?props.track1.name:null}</div>
+    <div className="optionsText">{props.track1?props.track1.name:null}</div>
     </Col>
     <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
-    <div class="optionsText">{props.track2?props.track2.name:null}</div>
+    <div className="optionsText">{props.track2?props.track2.name:null}</div>
     </Col>
   </Row>
   <Row>
-  <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
+    <Col md={{span:3, offset:2}} xs={{span:6, offset:0}}>
       <Image src={props.track1?props.track1.album.images["0"].url:null}  onClick={() => props.checkAnswer(props.track1, props.track2)} alt="" />
       <Row><Col>By {props.track1?props.track1.artists[0].name:null}</Col></Row>
     </Col>

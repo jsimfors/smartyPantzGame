@@ -17,10 +17,11 @@ const GameOverView = (props) => {
         </Col>
       </Row>
       <Row>
-        <Col id="highScoreMessage">
-          {props.highscoreMessage}
+        <Col md={{span:6, offset:3}}>
+          <Image src="https://i.imgur.com/qA66fUX.png"></Image>
         </Col>
       </Row>
+      <Row id="highScoreMessage"><Col>{props.highscoreMessage}</Col></Row>
       <Row>
         <Col>
           <div className="infotext">Score: {props.score}</div>
@@ -33,14 +34,8 @@ const GameOverView = (props) => {
       </Row>
       <Row style={{marginTop: "1%"}}>
         <Col>
-          <Button style={{marginRight: "1%"}} variant="outline-dark" onClick={function(e)
-            { history.push('/'); 
-            document.getElementsByClassName("body")[0].id = 'CategoryBody'
-            }}>BACK TO START</Button>
-          <Button variant="outline-dark" onClick={function(e) 
-            {history.push('/highscore')
-            document.getElementsByClassName("body")[0].id = 'CategoryBody'
-            }}>SEE HIGHSCORES</Button>
+          <Button style={{marginRight: "1%"}} variant="outline-dark" onClick={() => history.push('/')}>BACK TO START</Button>
+          <Button variant="outline-dark" onClick={() => history.push('/highscore')}>SEE HIGHSCORES</Button>
         </Col>
       </Row>
     </Container>);
