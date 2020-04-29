@@ -29,35 +29,14 @@ code {
 
  /* THE CONTAINER */
 
- .container-fluid{
+ /* .container-fluid{
   padding-left: 7em;
   padding-right: 7em;
   padding-top: 0px;
   margin-bottom: -10px;
-}
+} */
 
 
-/* STARTVIEW */
-.startView {
-  text-align: center;
-  
-}
-
-.startView img {
-  max-width: 80%;
-}
-
-.infotext {
-  margin-top: 40px;
-}
-
-.nameForm {
-  max-width: 20%;
-}
-
-.highscoreButton {
-  margin: 20px;
-}
 
 /* HIGHSCORE */
 .highScoreView .tableBox {

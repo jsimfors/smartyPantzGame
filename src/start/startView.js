@@ -2,12 +2,13 @@ import React from 'react';
 import {Container, Row, Col, Button, Image, InputGroup, FormControl, DropdownButton, Dropdown, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
+import './start.css'
 
 const StartView = (props) => {
   const history = useHistory();
 
   return (
-    <Container className="startView">
+    <Container className="startView" fluid>
       <Row>
         <Col>
         <Image src="https://i.imgur.com/u7zri8i.png"></Image>
@@ -15,13 +16,17 @@ const StartView = (props) => {
       </Row>
 
       <Row>
-        <Col md={{span: 8, offset: 2}}>
-        <div className="infotext"><b>Welcome to SmartyPantZ, the smartest music quiz on the internet! &#10; Type in your prefered name and start quizzing. Three wrong answers and you lose!</b></div>
+        <Col md={{span:10, offset:1}}>
+          <div className="infotext">
+            Welcome to the smartest music quiz on the internet! Show us your knowledge in music by answering question about track- and artist-popularity*
+            Three wrong answers and you lose.
+            Can you make it to the SmartypantZ-highscore, or are you just a dumb sock? <i>Let's find out!</i>
+          </div>
         </Col>
       </Row>
 
-      <Row style={{marginTop: "2%"}}> 
-        <Col md={{span:6, offset:3}}> 
+      <Row> 
+        <Col md={{span:6, offset:3}} xs={{span:10, offset:1}}> 
           <InputGroup className="nameInput">
             <FormControl
               placeholder="A superdupercool name"
@@ -60,6 +65,17 @@ const StartView = (props) => {
           <Button className="highscoreButton" variant="outline-danger" onClick={() => history.push('/highscore')}>HIGHSCORES</Button>
         </Col>
       </Row>
+
+      <Row>
+        <Col  md={{span:8, offset:2}}>
+          <div className="infoTextDisc">
+            *The popularity is calculated by algorithm and is based, in the most part, 
+            on the total number of plays the track has had and how recent those plays are.
+            Artist popularity is derived mathematically from track popularity.
+          </div>
+        </Col>
+      </Row>
+
     </Container>);
 }
 
