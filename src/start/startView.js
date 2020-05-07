@@ -4,28 +4,26 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import './start.css'
 
+// Main view for start page
 const StartView = (props) => {
   const history = useHistory();
-
   return (
     <Container className="startView" fluid>
-      <Row>
+      <Row> {/* SMARTY PANTZ logo on start page */}
         <Col>
         <Image src="https://i.imgur.com/u7zri8i.png"></Image>
         </Col>
       </Row>
-
-      <Row>
+      <Row> {/* Game introduction text */}
         <Col md={{span:10, offset:1}}>
           <div className="infotext">
-            Welcome to the smartest music quiz on the internet! Show us your knowledge in music by answering question about track- and artist-popularity*
+            Welcome to the smartest music quiz on the internet! Show us your knowledge in music by answering question about track and artist popularity*
             Three wrong answers and you lose.
-            Can you make it to the SmartypantZ-highscore, or are you just a dumb sock? <i>Let's find out!</i>
+            Can you make it to the SmartypantZ highscore, or are you just a dumb sock? <i>Let's find out!</i>
           </div>
         </Col>
       </Row>
-
-      <Row> 
+      <Row> {/* Input fields */}
         <Col md={{span:6, offset:3}} xs={{span:10, offset:1}}> 
           <InputGroup className="nameInput">
             <FormControl
@@ -38,8 +36,7 @@ const StartView = (props) => {
                 event.preventDefault();
                 var uName = event.target.value;
                 props.setUsername(uName);
-              }}
-            />
+              }}/>
             <DropdownButton as={InputGroup.Append} variant="outline-danger" title={props.category.toUpperCase()}>
                 {["Hits", "EDM", "Rock", "Hip-hop"].map((genre) => {
                     return <Dropdown.Item key={genre} onSelect={() => {
@@ -59,29 +56,29 @@ const StartView = (props) => {
           </InputGroup>
         </Col>
       </Row>
-
-      <Row>
+      <Row> {/* Button to go to high score page */}
         <Col>
           <Button className="highscoreButton" variant="outline-danger" onClick={() => history.push('/highscore')}>HIGHSCORES</Button>
         </Col>
       </Row>
-
-      <Row>
+      <Row> {/* Popularity explanation text */}
         <Col  md={{span:8, offset:2}}>
           <div className="infoTextDisc">
-            *The popularity is calculated by algorithm and is based, in the most part, 
-            on the total number of plays the track has had and how recent those plays are.
-            Artist popularity is derived mathematically from track popularity.
+            *The popularity is calculated by an algorithm and is based, in the most part, 
+            on the total number of plays the track has had on Spotify and how recent those
+            plays are. Artist popularity is derived mathematically from track popularity.
           </div>
         </Col>
       </Row>
-
     </Container>);
-}
+};
 
+// Define proptypes
 StartView.propTypes = {
   username: PropTypes.string.isRequired,
-  setUsername: PropTypes.func.isRequired
+  setUsername: PropTypes.func.isRequired,
+  category: PropTypes.string.isRequired,
+  setCategory: PropTypes.func.isRequired
 };
 
 export default StartView;

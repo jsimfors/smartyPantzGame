@@ -1,4 +1,3 @@
-
 html{
     height: 100%;
 }
@@ -21,22 +20,10 @@ body {
   height: 100%;
 }
 
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
- /* THE CONTAINER */
-
- /* .container-fluid{
-  padding-left: 7em;
-  padding-right: 7em;
-  padding-top: 0px;
-  margin-bottom: -10px;
-} */
-
-
 
 /* HIGHSCORE */
 .highScoreView .tableBox {

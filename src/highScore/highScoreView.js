@@ -1,15 +1,19 @@
 import React from 'react';
 import {Col, Row, Image, Table, Container, Button, Spinner} from 'react-bootstrap';
 import {useHistory} from 'react-router-dom';
+import ErrorView from '../error/errorView.js';
 
-
+// Main view for high score page
 const HighScoreView = (props) => {
     const history = useHistory();
+
+    // "Catch" errors from container
+    if (props.errMessage) return <ErrorView errMessage={props.errMessage}/>;
 
     return (
         <Container className="highScoreView">
             <Row style={{marginTop: "2%"}}>
-                <Col md={{span:2, offset:0}}>
+                <Col md={{span:2, offset:0}}> {/* Back to start page button */}
                     <Row style={{marginTop: "10%"}}>
                         <Button variant="outline-danger" onClick={function(e)
                             { history.push('/'); 
@@ -18,11 +22,11 @@ const HighScoreView = (props) => {
                         </Button>
                     </Row>
                 </Col>
-                <Col md={{span:8, offset:0}}>
+                <Col md={{span:8, offset:0}}> {/* High score label */}
                     <Image src={"https://i.imgur.com/nbrayQO.png"} alt="" />
                 </Col>
             </Row>
-            <Row style={{marginTop: "10%"}}>
+            <Row style={{marginTop: "10%"}}> {/* High score list for all categories */}
                 <Col md={{span:6, offset:3}}>
                     <Row className="justify-content-center">
                         <h2>All categories</h2>
@@ -30,7 +34,7 @@ const HighScoreView = (props) => {
                     {generateList(props.allScores)}
                 </Col>
             </Row>
-            <Row style={{marginTop: "2%"}}>
+            <Row style={{marginTop: "2%"}}> {/* High score lists for categories hits and EDM */}
                 <Col style={{marginRight: "2%"}}>
                     <Row className="justify-content-center">
                         <h2>Hits</h2>
@@ -44,7 +48,7 @@ const HighScoreView = (props) => {
                     {generateList(props.EDMScores)}
                 </Col>
             </Row>
-            <Row style={{marginTop: "2%", marginBottom: "2%"}}>
+            <Row style={{marginTop: "2%", marginBottom: "2%"}}> {/* High score lists for categories rock and hip-hop */}
                 <Col style={{marginRight: "2%"}}>
                     <Row className="justify-content-center">
                         <h2>Rock</h2>
@@ -61,6 +65,7 @@ const HighScoreView = (props) => {
         </Container>);
 }
 
+// Sub-view to high score view that displays a high score list as a table
 const generateList = (scores) => {
     return <Row className="tableBox justify-content-center">
         {scores.length === 0 ? <Spinner animation="border"/> :
@@ -69,11 +74,12 @@ const generateList = (scores) => {
                 <tr>
                 <th>Rank</th>
                 <th>Score</th>
+                {scores[0].category != null ? <th>Category</th> : null}
                 <th>Name</th>
                 </tr>
             </thead>
             <tbody>
-                {scores.map(({score, name}, index) => <tr key={index}><td>{index+1}</td><td>{score}</td><td>{name}</td></tr>)}
+                {scores.map((el, index) => <tr key={index}><td>{index+1}</td><td>{el.score}</td>{el.category != null ? <td>{el.category}</td> : null}<td>{el.name}</td></tr>)}
             </tbody>
         </Table>}
     </Row>

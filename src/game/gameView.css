@@ -1,97 +1,130 @@
-
-/* CSS used by all gameviews: */
+/* CSS used by all game views: */
 .gameView {
-    text-align: center;
-    margin: 0px;
-    height: 100%;
-  }
-  
-  .gameView .gameQuestion {
-    margin-bottom: -30px; 
-  }
- 
-  .gameView img {
-    max-width: 100%;
-    border-radius: 15px;
+  text-align: center;
+  margin: 0px;
+  height: 100%;
+}
 
-  }
-  
-  #pantzLife {
-    max-width: 100px;
-    max-height: 100px;
-  } 
+.gameView .gameQuestion {
+  margin-bottom: -30px; 
+}
 
-  #topBarHip-hop, #topBarHits, #topBarEDM, #topBarRock {
-    margin-top: 5%;
-  }
-  
-  .h0 {
-    font-size: 1000%;
-  }
-  
-  .result {
-    margin: 10px;
-    font-size: large;
-  }
+.gameView img {
+  max-width: 100%;
+  border-radius: 15px;
+  max-height: 250px;
+}
 
-    /* White box with the actuall game */
-    #gamePlay {
-      background-color: rgba(255, 255, 255, 0.897);
-      padding: 20px;
-      padding-top:50px;
-      border-radius: 70px;
-      -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-      -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-      box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-    }
-    
-    #gamePlay img {
-      -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-      -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-      box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-    }
-  
+#pantzLife {
+  max-width: 60px;
+  max-height: 60px;
+} 
+
+#topBarHip-hop, #topBarHits, #topBarEDM, #topBarRock {
+  margin-top: 5%;
+}
+
+#statsMessage {
+  font-size: large;
+  font-style: italic;
+}
+
+.h0 {
+  font-size: 1000%;
+}
+
+.result {
+  margin: 10px;
+  font-size: large;
+}
+
+/* White box with the actuall game */
+#gamePlay {
+  background-color: rgba(255, 255, 255, 0.897);
+  padding: 20px;
+  padding-top:50px;
+  border-radius: 70px;
+  -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+}
+
+#gamePlay img {
+  -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+}
 
 /* FOR MOBILE DEVICES: */  
 @media only screen and (max-width: 600px) {
-  .container-fluid{
+  .container-fluid {
     padding-left: 2em;
     padding-right: 2em;
     padding-top: 0px;
     margin-bottom: -10px;
   }
+
   #pantzLife {
     max-width: 40px;
     max-height: 40px;
   }
-  .optionsText{
+
+  .optionsText {
     font-weight: bold;
   }
 
-  #gamePlay{
-    display: inline-block;
+  #gamePlay {
+    margin: 8px;
+    margin-top: 0px;
+  }
+
+  .progress {
+    margin: 8px;
+  }
+
+  #topBarHip-hop button, #topBarHits button, #topBarRock button, #topBarEDM button {
+    padding: 1px;
+    margin-left: 8px;
+  }
+
+   #topBarHip-hop, #topBarHits, #topBarEDM, #topBarRock {
+    padding-top: 5%;
+    margin-bottom: 5%;
   }
 }
 
-
 /* FOR STYLING UNIQUE FOR DESKTOP : */  
 @media only screen and (min-width: 600px) {
-#topBarHip-hop, #topBarHits, #topBarEDM, #topBarRock {
-  margin-bottom: 2%;
-}
-#livesText {
-  font-size: x-large;
-  font-weight: bold;
-  text-align: right;
-} 
-#scoreText{
-  font-size: x-large;
-  font-weight: bold;
-}
-.optionsText{
-  font-size: x-large;
-  font-weight: bold;
-}
+  .container-fluid {
+    margin-left: 10%;
+    margin-right: 10%;
+    max-width: 80%;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 0px;
+    margin-bottom: -10px;
+  }
+
+  #topBarHip-hop, #topBarHits, #topBarEDM, #topBarRock {
+    margin-bottom: 2%;
+  }
+  
+
+  #livesText {
+    font-size: x-large;
+    text-align: right;
+    max-height: 100px;
+  } 
+
+  #scoreText {
+    font-size: x-large;
+    text-align: left;
+  }
+
+  .optionsText {
+    font-size: x-large;
+    font-weight: bold;
+  }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1100px) {
@@ -102,105 +135,148 @@
 }
 
 /* ROCK CATHEGORY */
-
-.body#RockBody{
+.body#RockBody {
   cursor: url("../imgs/sockboiRock.png"), auto;
   background-image: linear-gradient(120deg, #151515 0%, #272829 100%);
 }
 
-.gameView#Rock #topBarRock{
+.gameView#Rock #topBarRock {
   color: white;
 }
 
-/* HIP-HOP Hits */
+.body#RockBody .progress {
+  background-color: #070707;
+}
 
-.body#Hip-hopBody{
+.body#RockBody .progress-bar {
+  background-color: rgb(255, 153, 0)!important;  
+}
+
+#topBarRock button {
+  border: none;
+  background-color: rgb(7, 7, 7)!important;  
+  color:rgb(255, 255, 255);
+}
+
+/* HIP-HOP CATHEGORY */
+.body#Hip-hopBody {
   cursor: url("https://i.imgur.com/TlcA2Xs.png"), auto;
   background-image: url("https://vectorcove.com/media/2013/833/final.jpg");
   background-repeat: repeat;
   background-attachment: fixed;
 }
 
-#topBarHip-hop{
+#topBarHip-hop {
+  background-color: rgba(255, 255, 255, 0.897);
+  -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 0px;
+}
+
+@media only screen and (min-width: 600px) {
+  #topBarHip-hop {
+    border-radius: 70px;
+  }
+}
+
+#Hip-hopBody #statsMessage {
   background-color: rgba(255, 255, 255, 0.897);
   border-radius: 70px;
   -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
   -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
   box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.3);
-
   margin-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
+  display: inline-block;
 }
 
-
-/* EDM Hits */
-.body#EDMBody{
+/* EDM CATHEGORY */
+.body#EDMBody {
   cursor: url("../imgs/sockboiEDM2.png"), auto;
   background-image: linear-gradient(180deg, #e700e7 0%, #4d0064 100%);
 }
 
-img#gameQuestionEDM{
+.body#EDMBody .progress {
+  background-color: #260031;
+}
+
+.body#EDMBody .progress-bar {
+  background-color: rgba(162, 255, 0)!important;  
+  -webkit-box-shadow: 0px 0px 29px 6px rgba(170,255,33,1);
+  -moz-box-shadow: 0px 0px 29px 6px rgba(170,255,33,1);
+  box-shadow: 0px 0px 29px 6px rgba(170,255,33,1);
+}
+
+#topBarEDM button {
+  border: none;
+  background-color: rgba(162, 255, 0);  
+  -webkit-box-shadow: 0px 0px 29px 6px rgba(170,255,33,1);
+  -moz-box-shadow: 0px 0px 29px 6px rgba(170,255,33,1);
+  box-shadow: 0px 0px 29px 6px rgba(170,255,33,1);
+  color:black;
+}
+
+img#gameQuestionEDM {
   filter: hue-rotate(-45deg);
 }
 
-#topBarEDM img{
-  filter: hue-rotate(90deg) brightness(90%) contrast(120%)
+#topBarEDM img {
+  filter: hue-rotate(90deg) brightness(90%) contrast(120%);
 }
 
 /* ORIGINAL */
-.body#HitsBody{
+.body#HitsBody {
   cursor: url("https://i.imgur.com/TlcA2Xs.png"), auto;
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 }
 
 /* ------- MODAL -------- */
+.modal-content {
+  border-radius: 35px;
+}
 
-.modal-content{
-    border-radius: 35px;
-  }
-
-.modal-body{
+.modal-body {
   font-size: large;
   text-align: center;
 }
-  
-/* MODAL: Rock & Original */
 
-.modal-footer#Hitsw button, .modal-footer#Hitst button,  .modal-footer#Rockw button, .modal-footer#Rockt button{
-    /* Wrong-answer button for default and rock theme */
-    color: #520207;
-    font-weight: bold;
-    border-width: 3px;
-    border-color: #520207;
-    border-radius: 10px;
-    background-image: linear-gradient(to top, #9a0003 0%, #fe5d65 100%);
+/* MODAL: Rock & Original */
+.modal-footer#Hitsw button, .modal-footer#Hitst button,  .modal-footer#Rockw button, .modal-footer#Rockt button {
+  /* Wrong-answer button for default and rock theme */
+  color: #520207;
+  font-weight: bold;
+  border-width: 3px;
+  border-color: #520207;
+  border-radius: 10px;
+  background-image: linear-gradient(to top, #9a0003 0%, #fe5d65 100%);
 }
 
-  .modal-footer#Rockr button{
-    /* Correct-answer button for rock theme */
+.modal-footer#Rockr button {
+  /* Correct-answer button for rock theme */
+  color: #3b2f28;
+  font-weight: bold;
+  border-width: 3px;
+  border-color: #3b2f28;
+  border-radius: 10px;
+  background-image: linear-gradient(to top, #ff7f02 0%, #fffe00 100%);
+}
 
-    color: #3b2f28;
-    font-weight: bold;
-    border-width: 3px;
-    border-color: #3b2f28;
-    border-radius: 10px;
-    background-image: linear-gradient(to top, #ff7f02 0%, #fffe00 100%);
-  }
-  
-  .modal-footer#Hitsr button {
-    /* Correct-answer button for default theme */
+.modal-footer#Hitsr button {
+  /* Correct-answer button for default theme */
+  color: #305152;
+  font-weight: bold;
+  border-width: 3px;
+  border-color: #305152;
+  border-radius: 10px;
+  background-image: linear-gradient(to top, #31be95 0%, #76f5d0 100%);
+}
 
-    color: #305152;
-    font-weight: bold;
-    border-width: 3px;
-    border-color: #305152;
-    border-radius: 10px;
-    background-image: linear-gradient(to top, #31be95 0%, #76f5d0 100%);
-  }
-  
 /* EDM MODAL */
-.modal-footer#EDMw button{
+.modal-footer#EDMw button, .modal-footer#EDMt button {
   color: #260031;
   font-weight: bold;
   border-width: 3px;
@@ -209,7 +285,7 @@ img#gameQuestionEDM{
   background-image: linear-gradient(180deg, #e700c1 0%, #55004a 100%);
 }
 
-.modal-footer#EDMr button{
+.modal-footer#EDMr button {
   color: #0c6b09;
   font-weight: bold;
   border-width: 3px;
@@ -218,27 +294,27 @@ img#gameQuestionEDM{
   background-image: linear-gradient(to top, #00cc0a 0%, #6fff1c 100%);
 }
 
-  .modal-body#modalEDM #titlew, #titlet{
-    /* Styling for: EDM-theme: when wrong answer */
-    filter: hue-rotate(-40deg)
-  }
-
-  .modal-body#modalEDM #titler{
-        /* Styling for: EDM-theme: when correct answer */
-    filter: hue-rotate(-50deg)
-  }
-
-  /* HIP-HOP MODAL */
-  .modal-footer#Hip-hopw button, .modal-footer#Hip-hopt button{
-    color: #520207;
-    font-weight: bold;
-    border-width: 3px;
-    border-color: #520207;
-    border-radius: 10px;
-    background-image: linear-gradient(to top, #9a0003 0%, #fe5d65 100%);
+.modal-body#modalEDM #titlew, .modal-body#modalEDM #titlet {
+  /* Styling for: EDM-theme: when wrong answer */
+  filter: hue-rotate(-40deg);
 }
 
-.modal-footer#Hip-hopr button{
+.modal-body#modalEDM #titler {
+  /* Styling for: EDM-theme: when correct answer */
+  filter: hue-rotate(-50deg);
+}
+
+/* HIP-HOP MODAL */
+.modal-footer#Hip-hopw button, .modal-footer#Hip-hopt button {
+  color: #520207;
+  font-weight: bold;
+  border-width: 3px;
+  border-color: #520207;
+  border-radius: 10px;
+  background-image: linear-gradient(to top, #9a0003 0%, #fe5d65 100%);
+}
+
+.modal-footer#Hip-hopr button {
   color: #503416;
   font-weight: bold;
   border-width: 3px;
@@ -247,12 +323,12 @@ img#gameQuestionEDM{
   background-image: linear-gradient(to top, #94571e 0%, #ee9c3f 100%);
 }
 
-
-.modal-body#modalHip-hop #titlew, #titlet{
+.modal-body#modalHip-hop #titlew, .modal-body#modalHip-hop #titlet {
   /* Styling for: EDM-theme: when wrong answer */
-  filter: hue-rotate(0deg)
+  filter: hue-rotate(0deg);
 }
-  .modal-body#modalHip-hop #titler{
-        /* Styling for: EDM-theme: when correct answer */
-    filter: hue-rotate(220deg) contrast(120%) brightness(90%)
-  }
+.modal-body#modalHip-hop #titler {
+      /* Styling for: EDM-theme: when correct answer */
+  filter: hue-rotate(220deg) contrast(120%) brightness(90%);
+}
+

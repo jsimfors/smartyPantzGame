@@ -1,6 +1,7 @@
 import * as app from 'firebase/app';
 import 'firebase/firestore';
 
+// Necessary keys and ids to connect to the database
 const dbConfig = {
     apiKey: "AIzaSyAbWEE-X5hskw_9wvYfoixZoKnPRl9xQBw",
     authDomain: "smartypantz-c6131.firebaseapp.com",

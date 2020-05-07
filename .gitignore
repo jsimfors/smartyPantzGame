@@ -65,3 +65,9 @@ typings/
 
 # file with api keys
 apiConfig.js
+
+# Project to do list file
+todo.txt.
+
+# file with database keys
+dbConfig.js
