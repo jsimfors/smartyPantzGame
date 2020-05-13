@@ -79,7 +79,7 @@ const GameContainer = (props) => {
                         }
                     }, 100);
                     // Update statistic message
-                    db.collection("highscore").where("categor", "==", props.category).orderBy("score").get()
+                    db.collection("highscore").where("category", "==", props.category).orderBy("score").get()
                         .then((querySnapshot) => {
                             const scores = [];
                             querySnapshot.forEach((doc) => {
