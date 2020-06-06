@@ -1,8 +1,11 @@
 import React from 'react';
 import HighScoreView from './highScoreView';
+import ErrorView from '../error/errorView';
 import {db} from '../util/dbConfig.js';
+import {useHistory} from 'react-router-dom';
 
 const HighScoreContainer = () => {
+    const history = useHistory();
     const [allScores, setAllScores] = React.useState([]);
     const [hitsScores, setHitsScores] = React.useState([]);
     const [EDMScores, setEDMScores] = React.useState([]);
@@ -22,13 +25,20 @@ const HighScoreContainer = () => {
         getCategoryScores(setHiphopScores, "Hip-hop", setErrMessage);
     }, []);
     
-    return <HighScoreView
-        allScores = {allScores}
-        hitsScores = {hitsScores}
-        EDMScores = {EDMScores}
-        rockScores = {rockScores}
-        hiphopScores = {hiphopScores}
-        errMessage = {errMessage}/>;
+    if (errMessage) {
+        return <ErrorView errMessage={errMessage}/>;
+    } else {
+        return <HighScoreView
+            allScores = {allScores}
+            hitsScores = {hitsScores}
+            EDMScores = {EDMScores}
+            rockScores = {rockScores}
+            hiphopScores = {hiphopScores}
+            toStart = {() => {
+                history.push('/');
+                document.getElementsByClassName("body")[0].id = 'CategoryBody';
+            }}/>;
+    }
 };
 
 // Get high score list for all categories and update the state

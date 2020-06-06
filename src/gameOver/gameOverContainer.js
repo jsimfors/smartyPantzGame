@@ -5,7 +5,8 @@ import {useHistory, useParams} from 'react-router-dom';
 
 const GameOverContainer = (props) => {
     const history = useHistory();
-    let {onHighscore} = useParams(); 
+    let {onHighscore} = useParams();
+    
     const updateConfetti = (update) => {
         var element = document.getElementById("confettiParent");
         if (element) element.style.display = update;
@@ -30,9 +31,14 @@ const GameOverContainer = (props) => {
     }, []);
 
     return <GameOverView
-        highscoreMessage = {onHighscore === "true" ? "Congratulations " + props.username + "! You made it on the highscore list :D" : "Sorry " + props.username + ", you didn't get on the highscore list :("}
+        highscoreMessage = {onHighscore === "true" ?
+            "Congratulations " + props.username + "! You made it on the highscore list :D" :
+            "Sorry " + props.username + ", you didn't get on the highscore list :("}
         score = {props.score}
-        removeConfetti = {() => updateConfetti("none")}/>;
+        goTo = {(path) => {
+            updateConfetti("none");
+            history.push(path);
+        }}/>;
 };
 
 // Connect component to Redux store

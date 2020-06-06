@@ -1,82 +1,59 @@
 import React from 'react';
 import {Container, Row, Col, Image, ProgressBar, Button} from 'react-bootstrap';
 import ResultModal from './modal.js';
-import ErrorView from '../error/errorView.js';
-import {useHistory} from 'react-router-dom';
 import './gameView.css';
 
 // Main view for game page
-const GameView = React.forwardRef((props, ref) => {
-  const history = useHistory();
-  var pantzLifesrc;
-
-  // "Catch" errors from container
-  if (props.errMessage) return <ErrorView errMessage={props.errMessage}/>;
-
-  // Change pantZlife img depending on category
-  if (props.category === 'Rock') pantzLifesrc = require("../imgs/pantzRock.png");
-  else pantzLifesrc = "https://i.imgur.com/Zrdtb9n.png";
-
-  // Lives
-  var lifeCols = [];
-  for (let i = 0; i < 3; i++) {
-    lifeCols.push(
-        <Image id="pantzLife" style={{opacity: props.opacity[i]}} src={pantzLifesrc} key={i} ></Image>
-    );
-  }
-
-  // Change cursor depending on category
-  document.getElementsByClassName("body")[0].id = props.category + 'Body';
-
-  return (
-    <Container className='gameView' id={props.category} fluid> 
-      <Row id={"topBar"+props.category}> {/* Game header including current player, score and lives */}
-        <Col>
-          <Button variant="outline-danger" onClick={() => history.push('/')}>
-            LEAVE GAME
-          </Button>
-        </Col>
-        <Col>
-          <Row>
-            <div id="scoreText">Score: {props.score}</div>            
-          </Row>
-        </Col>
-        <Col>
-          <Row>
-          <div id="scoreText">Player: {props.name}</div>            
-          </Row>
-        </Col>
-        <Col  xs={{span:6}} sm={{span:8, offset:0}} md={{offset:1}}>
-          <Row id="livesText">
-            Lives: {lifeCols}
-            </Row>
-        </Col>
-      </Row>
-      <Row id="statsMessage"> {/* Statistic message */}
-        <Col>
-          {props.statsMessage}
-        </Col>
-      </Row>
-      {/* Question options (artists or tracks) */}
-      {options(props)}
-      <Row style={{marginTop: "2%"}}> {/* Timebar */}
-        <Col>
-          <ProgressBar animated striped variant="danger" now={(props.countdown > 0 ? 100 : props.time)}/>
-        </Col>
-      </Row>
-      <Row> {/* Modal between questions */}
-        <Col>
-          <ResultModal
-            show = {props.modalShow}
-            onHide = {() => props.setModalShow(false)}
-            message = {props.message}
-            category = {props.category}
-            gameoverpath = {props.gameoverpath}
-            ref = {ref}/>
-        </Col>
-      </Row>
-    </Container>);
-});
+const GameView = (props) => (
+  <Container className='gameView' id={props.category} fluid> 
+    <Row id={"topBar"+props.category}> {/* Game header including current player, score and lives */}
+      <Col>
+        <Button variant="outline-danger" onClick={() => props.goTo('/')}>
+          LEAVE GAME
+        </Button>
+      </Col>
+      <Col>
+        <Row>
+          <div id="scoreText">Score: {props.score}</div>            
+        </Row>
+      </Col>
+      <Col>
+        <Row>
+        <div id="scoreText">Player: {props.name}</div>            
+        </Row>
+      </Col>
+      <Col  xs={{span:6}} sm={{span:8, offset:0}} md={{offset:1}}>
+        <Row id="livesText">
+          Lives: {props.opacity.map((el, index) => {
+            return <Image id="pantzLife" style={{opacity: el}} src={props.pantzLifesrc} key={index} ></Image>
+          })}
+        </Row>
+      </Col>
+    </Row>
+    <Row id="statsMessage"> {/* Statistic message */}
+      <Col>
+        {props.statsMessage}
+      </Col>
+    </Row>
+    {/* Question options (artists or tracks) */}
+    {options(props)}
+    <Row style={{marginTop: "2%"}}> {/* Timebar */}
+      <Col>
+        <ProgressBar animated striped variant="danger" now={props.time}/>
+      </Col>
+    </Row>
+    <Row> {/* Modal between questions */}
+      <Col>
+        <ResultModal
+          show = {props.modalShow}
+          onHide = {props.onHide}
+          message = {props.message}
+          category = {props.category}
+          gameoverpath = {props.gameoverpath}
+          imgsrc = {props.modalImgsrc}/>
+      </Col>
+    </Row>
+  </Container>);
 
 // Subview showing count down or game question
 const options = (props) => {

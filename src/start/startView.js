@@ -1,13 +1,10 @@
 import React from 'react';
 import {Container, Row, Col, Button, Image, InputGroup, FormControl, DropdownButton, Dropdown, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import {useHistory} from 'react-router-dom';
 import './start.css'
 
 // Main view for start page
-const StartView = (props) => {
-  const history = useHistory();
-  return (
+const StartView = (props) => (
     <Container className="startView" fluid>
       <Row> {/* SMARTY PANTZ logo on start page */}
         <Col>
@@ -38,27 +35,27 @@ const StartView = (props) => {
                 props.setUsername(uName);
               }}/>
             <DropdownButton as={InputGroup.Append} variant="outline-danger" title={props.category.toUpperCase()}>
-                {["Hits", "EDM", "Rock", "Hip-hop"].map((genre) => {
+                {props.categories.map((genre) => {
                     return <Dropdown.Item key={genre} onSelect={() => {
                         props.setCategory(genre);
                     }}>{genre.toUpperCase()}</Dropdown.Item>
                 })}
             </DropdownButton>
             <InputGroup.Append>
-              {!(/^\S.*$/.test(props.username)) ?   
+              {props.invalidUsername ?   
               <OverlayTrigger placement="right" delay={{show: 250, hide: 400}} overlay={<Tooltip>Enter a username (starting with a non-whitespace character)</Tooltip>}>
                 <div style={{cursor: 'not-allowed'}}>
                   <Button style={{ pointerEvents: 'none' }} disabled variant="danger">START</Button>
                 </div>
               </OverlayTrigger> :
-              <Button variant="danger" onClick={() => history.push('/game')}>START</Button>}
+              <Button variant="danger" onClick={() => props.goTo('/game')}>START</Button>}
             </InputGroup.Append>
           </InputGroup>
         </Col>
       </Row>
       <Row> {/* Button to go to high score page */}
         <Col>
-          <Button className="highscoreButton" variant="outline-danger" onClick={() => history.push('/highscore')}>HIGHSCORES</Button>
+          <Button className="highscoreButton" variant="outline-danger" onClick={() => props.goTo('/highscore')}>HIGHSCORES</Button>
         </Col>
       </Row>
       <Row> {/* Popularity explanation text */}
@@ -71,7 +68,6 @@ const StartView = (props) => {
         </Col>
       </Row>
     </Container>);
-};
 
 // Define proptypes
 StartView.propTypes = {

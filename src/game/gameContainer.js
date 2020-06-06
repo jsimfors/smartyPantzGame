@@ -1,5 +1,6 @@
 import React from 'react';
 import GameView from './gameView.js';
+import ErrorView from '../error/errorView.js';
 import {getApiPlaylist} from '../util/apiReq.js';
 import {db} from '../util/dbConfig.js';
 import {useHistory} from 'react-router-dom';
@@ -36,6 +37,9 @@ const GameContainer = (props) => {
         // If the user is reloading they should be directed to start page
         if (props.username === "") history.push('/');
 
+        // Change cursor depending on category
+        document.getElementsByClassName("body")[0].id = props.category + 'Body';
+
         // Reset score, lives and start count down
         props.setScore(0);
         props.setLives(3);
@@ -56,6 +60,7 @@ const GameContainer = (props) => {
     // Start timebar, load new question and load new stats
     React.useEffect(() => {
         var interval;
+        var timer;
         mountedRef.current = true;
         if (countdown < 1 && !modalShow) {
             // Update question data like images, names and question
@@ -90,9 +95,13 @@ const GameContainer = (props) => {
                         .catch(() => {});
                 })
                 .catch(err => {if (mountedRef.current) setErrMessage(err)});
+        } else if (modalShow && gameoverpath) {
+            // Starts a 20 sec timer, to go to highscore, as soon as gameoverpath is no longer 'null'
+            timer = setTimeout(() => {if (mountedRef.current) history.push(gameoverpath)}, 20000);
         }
         return () => {
             clearInterval(interval);
+            clearTimeout(timer);
             mountedRef.current = false;
         };
     }, [modalShow]);
@@ -103,27 +112,54 @@ const GameContainer = (props) => {
     else if (props.lives === 1) opacity = [1, 0.5, 0.5];
     else if (props.lives === 0) opacity = [0.5, 0.5, 0.5];
 
-    return <GameView
-        score = {props.score}
-        opacity = {opacity}
-        track1 = {track1}
-        track2 = {track2}
-        artist1 = {artist1}
-        artist2 = {artist2}
-        checkAnswer = {(trackChosen, trackOther) => {
-            checkAnswer(trackChosen, trackOther, props.username, props.category, props.score, props.setScore, props.lives, props.setLives, setMessage, setModalShow, setGameOverPath, setErrMessage);
-        }}
-        message = {message}
-        countdown = {countdown}
-        time = {time}
-        modalShow = {modalShow}
-        setModalShow = {setModalShow}
-        statsMessage = {statsMessage}
-        category = {props.category}
-        errMessage = {errMessage}
-        gameoverpath = {gameoverpath}
-        name = {props.username}
-        ref = {mountedRef}/>
+    // Change pantZlife img depending on category
+    var pantzLifesrc;
+    if (props.category === 'Rock') pantzLifesrc = require("../imgs/pantzRock.png");
+    else pantzLifesrc = "https://i.imgur.com/Zrdtb9n.png";
+
+    // Set image based on result and category
+    var modalImgsrc;
+    if (message.result === 'r') {
+        if (props.category === 'Rock') modalImgsrc = 'fr' + message.img + '.png';
+        else modalImgsrc = 'f' + message.img + '.png';
+    } else if (message.result === 'w') {
+        modalImgsrc = 'b' + message.img + '.png';
+    } else if (message.result === 't') { 
+        modalImgsrc = 's1.png';
+    }
+    modalImgsrc = require('../imgs/' + modalImgsrc);
+
+    if (props.errMessage) {
+        return <ErrorView errMessage={props.errMessage}/>;
+    } else {
+        return <GameView
+            score = {props.score}
+            name = {props.username}
+            category = {props.category}
+            track1 = {track1}
+            track2 = {track2}
+            artist1 = {artist1}
+            artist2 = {artist2}
+            opacity = {opacity}
+            pantzLifesrc = {pantzLifesrc}
+            modalImgsrc = {modalImgsrc}
+            checkAnswer = {(trackChosen, trackOther) => {
+                checkAnswer(trackChosen, trackOther, props.username, props.category, props.score, props.setScore, props.lives, props.setLives, setMessage, setModalShow, setGameOverPath, setErrMessage);
+            }}
+            message = {message}
+            countdown = {countdown}
+            time = {countdown > 0 ? 100 : time}
+            modalShow = {modalShow}
+            setModalShow = {setModalShow}
+            statsMessage = {statsMessage}
+            errMessage = {errMessage}
+            gameoverpath = {gameoverpath}
+            onHide = {() => {
+                if (gameoverpath) history.push(gameoverpath);
+                else setModalShow(false);
+            }}
+            goTo = {(path) => history.push(path)}/>;
+    }
 }
 
 // Define proptypes
