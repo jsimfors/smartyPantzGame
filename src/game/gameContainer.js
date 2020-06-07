@@ -130,7 +130,9 @@ const GameContainer = (props) => {
     modalImgsrc = require('../imgs/' + modalImgsrc);
 
     if (props.errMessage) {
-        return <ErrorView errMessage={props.errMessage}/>;
+        return <ErrorView
+            errMessage={errMessage}
+            toStart={() => history.push('/')}/>;
     } else {
         return <GameView
             score = {props.score}

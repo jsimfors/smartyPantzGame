@@ -26,7 +26,9 @@ const HighScoreContainer = () => {
     }, []);
     
     if (errMessage) {
-        return <ErrorView errMessage={errMessage}/>;
+        return <ErrorView
+            errMessage={errMessage}
+            toStart={() => history.push('/')}/>;
     } else {
         return <HighScoreView
             allScores = {allScores}
